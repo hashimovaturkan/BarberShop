@@ -111,9 +111,9 @@ namespace BarberShop.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("/api/SmsVerification")]
-        public async Task<ActionResult<bool>> SmsVerification(int id, string value)
+        public async Task<ActionResult<bool>> SmsVerification(int userId, string value)
         {
-            var isSucces = await _userService.VerifyPhoneNumber(id, value);
+            var isSucces = await _userService.VerifyPhoneNumber(userId, value);
 
             if (isSucces)
                 return Ok();
