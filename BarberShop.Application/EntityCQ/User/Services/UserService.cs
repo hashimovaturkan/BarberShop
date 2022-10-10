@@ -152,17 +152,17 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             return user.Id;
         }
 
-        public async Task<bool> VerifyPhoneNumber(int? id, string value)
+        public async Task<bool> VerifyPhoneNumber(string phoneNumber, string value)
         {
-            var user = await _userRepo.GetUnverifiedUserByIdAsync((int)id);
+            var user = await _dbContext.Users.Include(e => e.UserTokens).FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive);
 
-            if(user != null)
+            if (user != null)
             {
                 if (user.UserTokens.FirstOrDefault()?.Value == value)
                 {
                     user.PhoneVerification = true;
 
-                    await _dbContext.SaveChangesAsync(CancellationToken.None);
+                    var isSucces = await _dbContext.SaveChangesAsync(CancellationToken.None);
 
                     return true;
                 }
@@ -190,6 +190,25 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             }
 
             return false;
+        }
+
+        public async Task<int> ResetPassword(string phoneNumber, string password)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive && e.PhoneVerification);
+            if( user == null)
+                throw new NotFoundException("User isn't exist");
+
+            if (password != null)
+            {
+                string passHash = AesOperation.Encrypt(password + user.Salt.ToString());
+
+                user.Password = passHash;
+
+                await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            }
+
+            return user.Id;
         }
     }
 }

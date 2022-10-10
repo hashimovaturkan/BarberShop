@@ -14,7 +14,8 @@ namespace BarberShop.Application.EntitiesCQ.User.Interfaces
     {
         Task<UserClaimsVm> GetUserClaims(int userId);
         Task<UserLoginVm> LoginAsync(UserLoginQuery request);
-        Task<bool> VerifyPhoneNumber(int? id, string value);
+        Task<bool> VerifyPhoneNumber(string phoneNumber, string value);
+        Task<int> ResetPassword(string phoneNumber, string password);
         Task<int> CreateAsync(CreateUserCommand createUserDto);
         Task<bool> SendSms(string phoneNumber);
     }

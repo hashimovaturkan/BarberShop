@@ -122,14 +122,23 @@ namespace BarberShop.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("/api/SmsVerification")]
-        public async Task<ActionResult<bool>> SmsVerification(int userId, string value)
+        public async Task<ActionResult<bool>> SmsVerification(string phoneNumber, string value)
         {
-            var isSucces = await _userService.VerifyPhoneNumber(userId, value);
+            var isSucces = await _userService.VerifyPhoneNumber(phoneNumber, value);
 
             if (isSucces)
                 return Ok();
             else
                 return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("/api/ResetPassword")]
+        public async Task<ActionResult<bool>> ResetPassword(string phoneNumber, string password)
+        {
+            var userId = await _userService.ResetPassword(phoneNumber, password);
+
+            return Ok(userId);
         }
 
 

@@ -28,27 +28,27 @@ namespace BarberShop.Persistence
         public BarberShopDbContext(DbContextOptions<BarberShopDbContext> options)
             : base(options) { }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            foreach (var entry in ChangeTracker.Entries())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        var entity = entry.Entity;
+        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        //{
+        //    foreach (var entry in ChangeTracker.Entries())
+        //    {
+        //        switch (entry.State)
+        //        {
+        //            case EntityState.Added:
+        //                var entity = entry.Entity;
 
-                        if (entity is ICreatedDate track)
-                            track.CreatedDate = DateTime.UtcNow.AddHours(4);
+        //                if (entity is ICreatedDate track)
+        //                    track.CreatedDate = DateTime.UtcNow.AddHours(4);
 
-                        if (entity is IActive active)
-                            active.IsActive = true;
+        //                if (entity is IActive active)
+        //                    active.IsActive = true;
 
-                        break;
-                }
-            }
+        //                break;
+        //        }
+        //    }
 
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
 
         public override Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Update<TEntity>(TEntity entity)
         {
