@@ -8,7 +8,7 @@ namespace BarberShop.Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            var conStr = configuration["DbConnection"];
+            var conStr = configuration.GetConnectionString("connectionString");
 
             services.AddDbContext<BarberShopDbContext>(opt => opt.UseSqlServer(conStr));
 

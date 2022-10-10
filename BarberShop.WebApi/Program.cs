@@ -110,6 +110,7 @@ if (!app.Environment.IsProduction())
 
     app.Seed();
 }
+
 app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();

@@ -48,7 +48,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             var userRoleClaimsQuery = await _dbContext.Users
                 .Include(e => e.UserRoleRelations)
                 .ThenInclude(e => e.UserRole).ThenInclude(e => e.UserRoleClaims).ThenInclude(e => e.UserClaim)
-                .Where(e => e.Id == userId && e.IsActive)
+                .Where(e => e.Id == userId && e.IsActive && e.PhoneVerification)
                 .FirstOrDefaultAsync();
 
             UserClaimsVm userClaimsVm = _mapper.Map<UserClaimsVm>(userRoleClaimsQuery);
@@ -59,7 +59,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
         public async Task<UserLoginVm> LoginAsync(UserLoginQuery request)
         {
             var user = await _dbContext.Users
-                .FirstOrDefaultAsync(e => e.Phone == request.Phone && e.IsActive,
+                .FirstOrDefaultAsync(e => e.Phone == request.Phone && e.IsActive && e.PhoneVerification,
                     CancellationToken.None);
 
             if (user is null)
@@ -82,7 +82,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
         public async Task<int> CreateAsync(CreateUserCommand request)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.Email == request.Email && x.IsActive);
+            var user = _dbContext.Users.FirstOrDefault(x => x.Email == request.Email && x.IsActive && x.PhoneVerification);
 
             if (user is not null && !string.IsNullOrWhiteSpace(user.Password))
                 throw new Exception("User is exist");

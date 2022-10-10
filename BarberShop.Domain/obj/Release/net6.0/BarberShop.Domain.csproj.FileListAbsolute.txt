@@ -1,0 +1,12 @@
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\bin\Release\net6.0\BarberShop.Domain.deps.json
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\bin\Release\net6.0\BarberShop.Domain.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\bin\Release\net6.0\BarberShop.Domain.pdb
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.csproj.AssemblyReference.cache
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.AssemblyInfoInputs.cache
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.AssemblyInfo.cs
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.csproj.CoreCompileInputs.cache
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\refint\BarberShop.Domain.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\BarberShop.Domain.pdb
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Release\net6.0\ref\BarberShop.Domain.dll

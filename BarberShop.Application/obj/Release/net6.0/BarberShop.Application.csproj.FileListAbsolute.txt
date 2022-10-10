@@ -1,0 +1,17 @@
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Application.deps.json
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Application.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Application.pdb
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Domain.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Persistence.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Persistence.pdb
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\bin\Release\net6.0\BarberShop.Domain.pdb
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.csproj.AssemblyReference.cache
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.AssemblyInfoInputs.cache
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.AssemblyInfo.cs
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.csproj.CoreCompileInputs.cache
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.csproj.CopyComplete
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\refint\BarberShop.Application.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\BarberShop.Application.pdb
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Application\obj\Release\net6.0\ref\BarberShop.Application.dll
