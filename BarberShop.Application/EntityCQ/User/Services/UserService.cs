@@ -63,12 +63,12 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     CancellationToken.None);
 
             if (user is null)
-                throw new DefaultValidationException($"User not exist");
+                throw new UnauthorizedException($"User not exist");
 
             string passHash = AesOperation.Decrypt(user.Password);
 
             if ((request.Password + user.Salt.ToString()) != passHash)
-                throw new DefaultValidationException($"User not exist");
+                throw new UnauthorizedException($"User not exist");
             
             UserLoginVm userLoginVm = _mapper.Map<UserLoginVm>(user);
 

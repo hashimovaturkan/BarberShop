@@ -8,6 +8,10 @@ namespace BarberShop.Application.Common.Exceptions
 {
     public class UnauthorizedException : Exception
     {
+        public UnauthorizedException(string message)
+            : base(message)
+        {
+        }
         public UnauthorizedException(string name, object key)
             : base($"User \"{name}\" not authorized.") { }
     }
