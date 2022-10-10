@@ -20,6 +20,8 @@ using BarberShop.Application.Models.Dto.User;
 using MoreLinq;
 using Microsoft.Extensions.Configuration;
 using BarberShop.Application.Repos;
+using BarberShop.Persistence.Migrations;
+using MediatR;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
 {
@@ -88,7 +90,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 throw new Exception("User is exist");
 
             Random rnd = new Random();
-            UserToken userToken = new UserToken
+            var userToken = new BarberShop.Domain.UserToken
             {
                 Value =  rnd.Next(100000, 999999).ToString(),
                 UserTokenTypeId = 1,
@@ -152,7 +154,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
         public async Task<bool> VerifyPhoneNumber(int? id, string value)
         {
-            var user = await _userRepo.GetUserByIdAsync((int)id);
+            var user = await _userRepo.GetUnverifiedUserByIdAsync((int)id);
 
             if(user != null)
             {
@@ -166,6 +168,25 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 }
                 else
                     return false;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> SendSms(string phoneNumber)
+        {
+            var user = await _dbContext.Users.Include(e => e.UserTokens).FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive && e.PhoneVerification);
+            if( user != null)
+            {
+                Random rnd = new Random();
+                var usertoken = user.UserTokens.First();
+                usertoken.Value = rnd.Next(100000, 999999).ToString();
+
+                await _dbContext.SaveChangesAsync(CancellationToken.None);
+                var isSucces = await SmsVerification.SendSms(phoneNumber, usertoken.Value);
+
+                if (isSucces)
+                    return true;
             }
 
             return false;

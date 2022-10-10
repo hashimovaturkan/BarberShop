@@ -12,7 +12,17 @@ namespace BarberShop.Application.Repos
         {
         }
 
-        public async Task<Domain.User> GetUserByIdAsync(int userId)
+        public async Task<Domain.User> GetVerifiedUserByIdAsync(int userId)
+        {
+            Domain.User? user = await AsQueryable().AsNoTracking()
+                .Include(e => e.UserTokens)
+                .Where(e => e.Id == userId && e.IsActive && e.PhoneVerification)
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
+
+        public async Task<Domain.User> GetUnverifiedUserByIdAsync(int userId)
         {
             Domain.User? user = await AsQueryable().AsNoTracking()
                 .Include(e => e.UserTokens)

@@ -108,6 +108,17 @@ namespace BarberShop.WebApi.Controllers
             return Ok(userId);
         }
 
+        [AllowAnonymous]
+        [HttpPost("/api/SendSms")]
+        public async Task<ActionResult<bool>> SendSms(string phoneNumber)
+        {
+            var isSucces = await _userService.SendSms(phoneNumber);
+
+            if (isSucces)
+                return Ok();
+            else
+                return BadRequest();
+        }
 
         [AllowAnonymous]
         [HttpPost("/api/SmsVerification")]
