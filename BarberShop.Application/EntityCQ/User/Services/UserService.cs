@@ -22,6 +22,7 @@ using Microsoft.Extensions.Configuration;
 using BarberShop.Application.Repos;
 using BarberShop.Persistence.Migrations;
 using MediatR;
+using BarberShop.Application.Common.Extensions;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
 {
@@ -136,7 +137,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
                 user.UserFilials = userFilials;
 
-                var isSucces = await SmsVerification.SendSms(request.Phone, userToken.Value);
+                var isSucces = await SmsVerification.SendSms(request.Phone.PhoneNumbber(), userToken.Value);
 
                 if (isSucces)
                 {
@@ -183,7 +184,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 usertoken.Value = rnd.Next(100000, 999999).ToString();
 
                 await _dbContext.SaveChangesAsync(CancellationToken.None);
-                var isSucces = await SmsVerification.SendSms(phoneNumber, usertoken.Value);
+                var isSucces = await SmsVerification.SendSms(phoneNumber.PhoneNumbber(), usertoken.Value);
 
                 if (isSucces)
                     return true;
