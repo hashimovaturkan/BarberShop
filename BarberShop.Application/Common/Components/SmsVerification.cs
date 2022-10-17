@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using RestSharp;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using RestSharp.Authenticators;
 
 namespace BarberShop.Application.Common.Components
 {
@@ -20,17 +21,25 @@ namespace BarberShop.Application.Common.Components
             string result;
             try
             {
-                var client = new RestClient("http://www.poctgoyercini.com/api_http/sendsms.asp");
-                var request = new RestRequest("http://www.poctgoyercini.com/api_http/sendsms.asp", Method.Post);
+                //var client = new RestClient("http://www.poctgoyercini.com/api_http/sendsms.asp");
+                //var request = new RestRequest("http://www.poctgoyercini.com/api_http/sendsms.asp", Method.Post);
 
-                request.AddParameter("user", "burncode");
-                request.AddParameter("password", "myaccess");
-                request.AddParameter("gsm", phoneNumber);
-                request.AddParameter("text", value);
+                //request.AddParameter("user", "burncode");
+                //request.AddParameter("password", "myaccess");
+                //request.AddParameter("gsm", phoneNumber);
+                //request.AddParameter("text", value);
 
-                request.AddHeader(HttpRequestHeader.ContentType.ToString(), "text/html");
+                //request.AddHeader(HttpRequestHeader.ContentType.ToString(), "text/html");
 
-                var response = await client.ExecuteAsync(request);
+                //var response = await client.ExecuteAsync(request);
+
+                var client = new RestClient("https://api.labsmobile.com/json/send");
+                client.Authenticator = new HttpBasicAuthenticator("sgubadov@mgc.az", "9M5WppwN7pV3");
+                var request = new RestRequest("https://api.labsmobile.com/json/send", Method.Post);
+                request.AddHeader("Cache-Control", "no-cache");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddBody("{\"message\":\"" + value + "\", \"tpoa\":\"BarberShop\",\"recipient\":[{\"msisdn\":\"" + phoneNumber + "\"}]}");
+                var response = client.Execute(request);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                     return true;

@@ -14,13 +14,15 @@ namespace BarberShop.Application.Common.Extensions
 {
     public static partial class Extension
     {
-        public static string PhoneNumbber(this string number)
+        public static string PhoneNumber(this string number)
         {
-            if (number.Contains("+994"))
-                number = number.Substring(4, number.Length-4);
+            //if (number.Contains("+994"))
+            //    number = number.Substring(4, number.Length-4);
 
-            if (number.Contains("+48"))
-                number = number.Substring(3, number.Length-3);
+            //if (number.Contains("+48"))
+            //    number = number.Substring(3, number.Length-3);
+
+            number = number.Substring(1, number.Length - 1);
 
             return number;
         }
