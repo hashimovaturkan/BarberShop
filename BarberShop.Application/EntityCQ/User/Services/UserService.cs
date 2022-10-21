@@ -85,10 +85,24 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
         public async Task<int> CreateAsync(CreateUserCommand request)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.Email == request.Email && x.IsActive && x.PhoneVerification);
+            var user = await _dbContext.Users.Include(e => e.UserTokens).FirstOrDefaultAsync(x => x.Phone == request.Phone && x.IsActive);
 
-            if (user is not null && !string.IsNullOrWhiteSpace(user.Password))
-                throw new Exception("User is exist");
+            if (user is not null && user.PhoneVerification)
+                throw new Exception("User is exist"); 
+
+            if (user is not null && !user.PhoneVerification)
+            {
+                Random random = new Random();
+                var usertoken = user.UserTokens.First();
+                usertoken.Value = random.Next(100000, 999999).ToString();
+
+                await _dbContext.SaveChangesAsync(CancellationToken.None);
+                var isSucces = await SmsVerification.SendSms(request.Phone.PhoneNumber(), usertoken.Value);
+
+                if (isSucces)
+                    return user.Id;
+
+            }
 
             Random rnd = new Random();
             var userToken = new BarberShop.Domain.UserToken
@@ -176,7 +190,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
         public async Task<bool> SendSms(string phoneNumber)
         {
-            var user = await _dbContext.Users.Include(e => e.UserTokens).FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive && e.PhoneVerification);
+            var user = await _dbContext.Users.Include(e => e.UserTokens).FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive);
             if( user != null)
             {
                 Random rnd = new Random();
@@ -195,7 +209,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
         public async Task<int> ResetPassword(string phoneNumber, string password)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive && e.PhoneVerification);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Phone == phoneNumber && e.IsActive);
             if( user == null)
                 throw new NotFoundException("User isn't exist");
 

@@ -10,3 +10,15 @@ D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\Barb
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\refint\BarberShop.Domain.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.pdb
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\ref\BarberShop.Domain.dll
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\bin\Debug\net6.0\BarberShop.Domain.deps.json
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\bin\Debug\net6.0\BarberShop.Domain.dll
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\bin\Debug\net6.0\BarberShop.Domain.pdb
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.csproj.AssemblyReference.cache
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.AssemblyInfoInputs.cache
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.AssemblyInfo.cs
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.csproj.CoreCompileInputs.cache
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.dll
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\refint\BarberShop.Domain.dll
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\BarberShop.Domain.pdb
+C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.Domain\obj\Debug\net6.0\ref\BarberShop.Domain.dll
