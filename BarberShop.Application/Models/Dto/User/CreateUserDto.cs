@@ -10,7 +10,7 @@ namespace BarberShop.Application.Models.Dto.User
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
-        public int[] FilialIds { get; set; }
+        public int FilialId { get; set; }
         public string Email { get; set; }
 
         public void Mapping(Profile profile)

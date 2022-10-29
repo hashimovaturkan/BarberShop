@@ -35,7 +35,6 @@ namespace BarberShop.Application.Repos
         public IQueryable<Domain.User> GetListQuery()
         {
             IQueryable<Domain.User> result = AsQueryable().AsNoTracking()
-                .Include(e => e.UserFilials)
                 .Include(e => e.UserRoleRelations)
                 .Where(e => e.IsActive && e.PhoneVerification);
 

@@ -20,7 +20,6 @@ namespace BarberShop.Persistence
         public virtual DbSet<UserToken> UserTokens { get; set; }
         public virtual DbSet<UserTokenStatus> UserTokenStatuses { get; set; }
         public virtual DbSet<UserTokenType> UserTokenTypes { get; set; }
-        public virtual DbSet<UserFilial> UserFilials { get; set; }
         public virtual DbSet<Filial> Filials { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Lang> Langs { get; set; }

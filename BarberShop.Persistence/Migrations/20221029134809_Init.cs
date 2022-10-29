@@ -164,10 +164,13 @@ namespace BarberShop.Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    EmailVerification = table.Column<bool>(type: "bit", nullable: false),
+                    PhoneVerification = table.Column<bool>(type: "bit", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Salt = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserStatusId = table.Column<int>(type: "int", nullable: false),
+                    FilialId = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedIp = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -177,6 +180,12 @@ namespace BarberShop.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    //table.ForeignKey(
+                    //    name: "FK_Users_Filials_FilialId",
+                    //    column: x => x.FilialId,
+                    //    principalTable: "Filials",
+                    //    principalColumn: "Id",
+                    //    onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Users_UserStatuses_UserStatusId",
                         column: x => x.UserStatusId,
@@ -241,37 +250,6 @@ namespace BarberShop.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserFilials",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    FilialId = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedIp = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserFilials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserFilials_Filials_FilialId",
-                        column: x => x.FilialId,
-                        principalTable: "Filials",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserFilials_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserRoleRelations",
                 columns: table => new
                 {
@@ -309,7 +287,7 @@ namespace BarberShop.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    Value = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserTokenTypeId = table.Column<int>(type: "int", nullable: false),
                     UserTokenStatusId = table.Column<int>(type: "int", nullable: false),
                     ExpireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -353,16 +331,6 @@ namespace BarberShop.Persistence.Migrations
                 column: "UserClaimTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserFilials_FilialId",
-                table: "UserFilials",
-                column: "FilialId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserFilials_UserId",
-                table: "UserFilials",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserRoleClaims_UserClaimId",
                 table: "UserRoleClaims",
                 column: "UserClaimId");
@@ -381,6 +349,11 @@ namespace BarberShop.Persistence.Migrations
                 name: "IX_UserRoleRelations_UserRoleId",
                 table: "UserRoleRelations",
                 column: "UserRoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_FilialId",
+                table: "Users",
+                column: "FilialId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UserStatusId",
@@ -412,9 +385,6 @@ namespace BarberShop.Persistence.Migrations
                 name: "Langs");
 
             migrationBuilder.DropTable(
-                name: "UserFilials");
-
-            migrationBuilder.DropTable(
                 name: "UserLogs");
 
             migrationBuilder.DropTable(
@@ -425,9 +395,6 @@ namespace BarberShop.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Filials");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -446,6 +413,9 @@ namespace BarberShop.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserClaimTypes");
+
+            migrationBuilder.DropTable(
+                name: "Filials");
 
             migrationBuilder.DropTable(
                 name: "UserStatuses");

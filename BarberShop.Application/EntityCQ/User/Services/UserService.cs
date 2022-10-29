@@ -20,7 +20,6 @@ using BarberShop.Application.Models.Dto.User;
 using MoreLinq;
 using Microsoft.Extensions.Configuration;
 using BarberShop.Application.Repos;
-using BarberShop.Persistence.Migrations;
 using MediatR;
 using BarberShop.Application.Common.Extensions;
 
@@ -88,7 +87,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             var user = await _dbContext.Users.Include(e => e.UserTokens).FirstOrDefaultAsync(x => x.Phone == request.Phone && x.IsActive);
 
             if (user is not null && user.PhoneVerification)
-                throw new Exception("User is exist"); 
+                throw new BadRequestException("User is exist"); 
 
             if (user is not null && !user.PhoneVerification)
             {
@@ -137,20 +136,6 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     
                 };
 
-                List<UserFilial> userFilials = new List<UserFilial>();
-
-                foreach (var id in request.FilialIds)
-                {
-                    userFilials.Add(new UserFilial
-                    {
-                        FilialId = id,
-                        User = user,
-                        CreatedIp= request.UserIp
-                    });
-                }
-
-                user.UserFilials = userFilials;
-
                 var isSucces = await SmsVerification.SendSms(request.Phone.PhoneNumber(), userToken.Value);
 
                 if (isSucces)
@@ -159,6 +144,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     user.UserTokens.Add(userToken);
                 }
 
+                
             }
 
             await _dbContext.SaveChangesAsync(CancellationToken.None);

@@ -11,10 +11,10 @@ namespace BarberShop.Domain
     {
         public Filial()
         {
-            UserFilials = new HashSet<UserFilial>();
+            Users = new HashSet<User>();
         }
         public string Name { get; set; }
 
-        public virtual ICollection<UserFilial> UserFilials { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

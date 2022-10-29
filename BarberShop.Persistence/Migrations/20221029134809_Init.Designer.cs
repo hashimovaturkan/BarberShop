@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberShop.Persistence.Migrations
 {
     [DbContext(typeof(BarberShopDbContext))]
-    [Migration("20221009072916_SaltGuid")]
-    partial class SaltGuid
+    [Migration("20221029134809_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -152,6 +152,12 @@ namespace BarberShop.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("EmailVerification")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("FilialId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -169,6 +175,9 @@ namespace BarberShop.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("PhoneVerification")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("Salt")
                         .HasColumnType("uniqueidentifier");
 
@@ -184,6 +193,8 @@ namespace BarberShop.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FilialId");
 
                     b.HasIndex("UserStatusId");
 
@@ -245,46 +256,6 @@ namespace BarberShop.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserClaimTypes");
-                });
-
-            modelBuilder.Entity("BarberShop.Domain.UserFilial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FilialId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FilialId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserFilials");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserLog", b =>
@@ -488,8 +459,9 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<int>("UserTokenTypeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("Value")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -555,11 +527,19 @@ namespace BarberShop.Persistence.Migrations
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
+                    b.HasOne("BarberShop.Domain.Filial", "Filial")
+                        .WithMany("Users")
+                        .HasForeignKey("FilialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BarberShop.Domain.UserStatus", "UserStatus")
                         .WithMany("Users")
                         .HasForeignKey("UserStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Filial");
 
                     b.Navigation("UserStatus");
                 });
@@ -573,25 +553,6 @@ namespace BarberShop.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("UserClaimType");
-                });
-
-            modelBuilder.Entity("BarberShop.Domain.UserFilial", b =>
-                {
-                    b.HasOne("BarberShop.Domain.Filial", "Filial")
-                        .WithMany("UserFilials")
-                        .HasForeignKey("FilialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BarberShop.Domain.User", "User")
-                        .WithMany("UserFilials")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Filial");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRoleClaim", b =>
@@ -661,14 +622,12 @@ namespace BarberShop.Persistence.Migrations
 
             modelBuilder.Entity("BarberShop.Domain.Filial", b =>
                 {
-                    b.Navigation("UserFilials");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
                     b.Navigation("ErrorLogs");
-
-                    b.Navigation("UserFilials");
 
                     b.Navigation("UserRoleRelations");
 

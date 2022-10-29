@@ -9,7 +9,7 @@ namespace BarberShop.Application.EntitiesCQ.User.Commands.CreateUser
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
-        public int[] FilialIds { get; set; }
+        public int FiliaId { get; set; }
         public string Email { get; set; }
 
         public void Mapping(Profile profile)

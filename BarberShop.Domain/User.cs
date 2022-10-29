@@ -12,7 +12,6 @@ namespace BarberShop.Domain
             ErrorLogs = new HashSet<ErrorLog>();
             UserRoleRelations = new HashSet<UserRoleRelation>();
             UserTokens = new HashSet<UserToken>();
-            UserFilials = new HashSet<UserFilial>();
         }
 
 
@@ -41,11 +40,12 @@ namespace BarberShop.Domain
 
         public Guid Salt { get; set; }
         public int UserStatusId { get; set; }
+        public int FilialId { get; set; }
 
         public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
         public virtual UserStatus UserStatus { get; set; }
+        public virtual Filial Filial { get; set; }
         public virtual ICollection<UserRoleRelation> UserRoleRelations { get; set; }
         public virtual ICollection<UserToken> UserTokens { get; set; }
-        public virtual ICollection<UserFilial> UserFilials { get; set; }
     }
 }

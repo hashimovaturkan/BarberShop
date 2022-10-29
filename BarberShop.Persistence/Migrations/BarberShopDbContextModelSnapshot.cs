@@ -63,7 +63,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ErrorLogs");
+                    b.ToTable("ErrorLogs", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.Filial", b =>
@@ -97,7 +97,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Filials");
+                    b.ToTable("Filials", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.Lang", b =>
@@ -123,7 +123,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Langs");
+                    b.ToTable("Langs", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
@@ -152,6 +152,9 @@ namespace BarberShop.Persistence.Migrations
 
                     b.Property<bool>("EmailVerification")
                         .HasColumnType("bit");
+
+                    b.Property<int>("FilialId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -189,9 +192,11 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FilialId");
+
                     b.HasIndex("UserStatusId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserClaim", b =>
@@ -227,7 +232,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserClaimTypeId");
 
-                    b.ToTable("UserClaims");
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserClaimType", b =>
@@ -248,47 +253,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClaimTypes");
-                });
-
-            modelBuilder.Entity("BarberShop.Domain.UserFilial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedIp")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FilialId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FilialId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserFilials");
+                    b.ToTable("UserClaimTypes", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserLog", b =>
@@ -311,7 +276,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserLogs");
+                    b.ToTable("UserLogs", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRole", b =>
@@ -351,7 +316,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRoleClaim", b =>
@@ -391,7 +356,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserRoleId");
 
-                    b.ToTable("UserRoleClaims");
+                    b.ToTable("UserRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRoleRelation", b =>
@@ -431,7 +396,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserRoleId");
 
-                    b.ToTable("UserRoleRelations");
+                    b.ToTable("UserRoleRelations", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserStatus", b =>
@@ -452,7 +417,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserStatuses");
+                    b.ToTable("UserStatuses", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserToken", b =>
@@ -504,7 +469,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserTokenTypeId");
 
-                    b.ToTable("UserTokens");
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserTokenStatus", b =>
@@ -525,7 +490,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserTokenStatuses");
+                    b.ToTable("UserTokenStatuses", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserTokenType", b =>
@@ -546,7 +511,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserTokenTypes");
+                    b.ToTable("UserTokenTypes", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Domain.ErrorLog", b =>
@@ -560,11 +525,19 @@ namespace BarberShop.Persistence.Migrations
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
+                    b.HasOne("BarberShop.Domain.Filial", "Filial")
+                        .WithMany("Users")
+                        .HasForeignKey("FilialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BarberShop.Domain.UserStatus", "UserStatus")
                         .WithMany("Users")
                         .HasForeignKey("UserStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Filial");
 
                     b.Navigation("UserStatus");
                 });
@@ -578,25 +551,6 @@ namespace BarberShop.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("UserClaimType");
-                });
-
-            modelBuilder.Entity("BarberShop.Domain.UserFilial", b =>
-                {
-                    b.HasOne("BarberShop.Domain.Filial", "Filial")
-                        .WithMany("UserFilials")
-                        .HasForeignKey("FilialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BarberShop.Domain.User", "User")
-                        .WithMany("UserFilials")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Filial");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRoleClaim", b =>
@@ -666,14 +620,12 @@ namespace BarberShop.Persistence.Migrations
 
             modelBuilder.Entity("BarberShop.Domain.Filial", b =>
                 {
-                    b.Navigation("UserFilials");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
                     b.Navigation("ErrorLogs");
-
-                    b.Navigation("UserFilials");
 
                     b.Navigation("UserRoleRelations");
 
