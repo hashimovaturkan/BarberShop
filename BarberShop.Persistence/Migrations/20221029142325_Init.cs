@@ -180,12 +180,12 @@ namespace BarberShop.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    //table.ForeignKey(
-                    //    name: "FK_Users_Filials_FilialId",
-                    //    column: x => x.FilialId,
-                    //    principalTable: "Filials",
-                    //    principalColumn: "Id",
-                    //    onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Users_Filials_FilialId",
+                        column: x => x.FilialId,
+                        principalTable: "Filials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Users_UserStatuses_UserStatusId",
                         column: x => x.UserStatusId,

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberShop.Persistence.Migrations
 {
     [DbContext(typeof(BarberShopDbContext))]
-    [Migration("20221029134809_Init")]
+    [Migration("20221029142325_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

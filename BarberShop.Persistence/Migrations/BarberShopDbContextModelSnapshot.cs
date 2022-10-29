@@ -63,7 +63,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ErrorLogs", (string)null);
+                    b.ToTable("ErrorLogs");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.Filial", b =>
@@ -97,7 +97,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Filials", (string)null);
+                    b.ToTable("Filials");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.Lang", b =>
@@ -123,7 +123,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Langs", (string)null);
+                    b.ToTable("Langs");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
@@ -196,7 +196,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserStatusId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserClaim", b =>
@@ -232,7 +232,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserClaimTypeId");
 
-                    b.ToTable("UserClaims", (string)null);
+                    b.ToTable("UserClaims");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserClaimType", b =>
@@ -253,7 +253,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClaimTypes", (string)null);
+                    b.ToTable("UserClaimTypes");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserLog", b =>
@@ -276,7 +276,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserLogs", (string)null);
+                    b.ToTable("UserLogs");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRole", b =>
@@ -316,7 +316,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserRoles", (string)null);
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRoleClaim", b =>
@@ -356,7 +356,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserRoleId");
 
-                    b.ToTable("UserRoleClaims", (string)null);
+                    b.ToTable("UserRoleClaims");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserRoleRelation", b =>
@@ -396,7 +396,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserRoleId");
 
-                    b.ToTable("UserRoleRelations", (string)null);
+                    b.ToTable("UserRoleRelations");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserStatus", b =>
@@ -417,7 +417,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserStatuses", (string)null);
+                    b.ToTable("UserStatuses");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserToken", b =>
@@ -469,7 +469,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserTokenTypeId");
 
-                    b.ToTable("UserTokens", (string)null);
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserTokenStatus", b =>
@@ -490,7 +490,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserTokenStatuses", (string)null);
+                    b.ToTable("UserTokenStatuses");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserTokenType", b =>
@@ -511,7 +511,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserTokenTypes", (string)null);
+                    b.ToTable("UserTokenTypes");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.ErrorLog", b =>

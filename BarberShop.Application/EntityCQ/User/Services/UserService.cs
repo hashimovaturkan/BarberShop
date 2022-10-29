@@ -130,6 +130,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     Phone = request.Phone,
                     Password = passHash,
                     Salt = salt,
+                    FilialId = request.FilialId,
                     UserStatusId = 1,
                     IsActive = true,
                     CreatedIp = request.UserIp,
