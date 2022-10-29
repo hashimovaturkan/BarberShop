@@ -34,7 +34,7 @@ namespace BarberShop.Application.Common.Components
                 //var response = await client.ExecuteAsync(request);
 
                 var client = new RestClient("https://api.labsmobile.com/json/send");
-                client.Authenticator = new HttpBasicAuthenticator("main@legacybarber.pl", "oCnkp6yygwS4q5pmFHQ8UpKLmbW5gH5u");
+                client.Authenticator = new HttpBasicAuthenticator("app@legacybarber.pl", "wello6543210");
                 var request = new RestRequest("https://api.labsmobile.com/json/send", Method.Post);
                 request.AddHeader("Cache-Control", "no-cache");
                 request.AddHeader("Content-Type", "application/json");
