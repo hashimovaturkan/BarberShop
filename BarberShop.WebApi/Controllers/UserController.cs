@@ -3,8 +3,12 @@ using BarberShop.Application.EntitiesCQ.User.Commands.CreateUser;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
+using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
+using BarberShop.Application.Enums;
 using BarberShop.Application.Models.Dto.User;
 using BarberShop.Application.Models.Vm.User;
+using BarberShop.WebApi.Attributes;
+using IntraNet.Application.Models.Vm.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -123,6 +127,25 @@ namespace BarberShop.WebApi.Controllers
             return Ok(userId);
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult<UserDetailsVm>> UserDetails()
+        {
+            var user = await _userService.Get(UserId);
+
+            return Ok(user);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto)
+        {
+            var command = _mapper.Map<UpdateUserCommand>(updateUserDto);
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            await _userService.Update(command);
+
+            return NoContent();
+        }
 
     }
 }

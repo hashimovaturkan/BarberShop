@@ -1,27 +1,21 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Components;
 using BarberShop.Application.Common.Exceptions;
+using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.Common.Services;
 using BarberShop.Application.EntitiesCQ.User.Commands.CreateUser;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
-using BarberShop.Application.EntitiesCQ.User.Queries.PassResetGetUser;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
-using BarberShop.Application.Models.Template;
+using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.Models.Vm.User;
+using BarberShop.Application.Repos;
 using BarberShop.Domain;
 using BarberShop.Persistence;
+using IntraNet.Application.Models.Vm.User;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using BarberShop.Application.Models.Dto.User;
-using MoreLinq;
 using Microsoft.Extensions.Configuration;
-using BarberShop.Application.Repos;
-using MediatR;
-using BarberShop.Application.Common.Extensions;
+using MoreLinq;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
 {
@@ -209,6 +203,31 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 await _dbContext.SaveChangesAsync(CancellationToken.None);
 
             }
+
+            return user.Id;
+        }
+
+        public async Task<UserDetailsVm> Get(int userId)
+        {
+            var user = await _dbContext.Users.Include(e => e.Filial).FirstOrDefaultAsync(e => e.Id == userId && e.IsActive);
+            if (user == null)
+                throw new NotFoundException(nameof(User), userId);
+
+            var vm = _mapper.Map<UserDetailsVm>(user);
+
+            return vm;
+        }
+
+        public async Task<int> Update(UpdateUserCommand userDto)
+        {
+            var user = await _dbContext.Users.Include(e => e.Filial).FirstOrDefaultAsync(e => e.Id == userDto.Id && e.IsActive);
+            if (user == null)
+                throw new NotFoundException(nameof(User), userDto.Id);
+
+            _mapper.Map(userDto, user);
+            user.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
 
             return user.Id;
         }
