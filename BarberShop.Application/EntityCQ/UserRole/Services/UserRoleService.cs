@@ -36,7 +36,9 @@ namespace BarberShop.Application.EntitiesCQ.UserRole.Services
                 {
                     Name = name,
                     CreatedIp = userIp,
-                    Description = ""
+                    Description = name,
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
                 };
 
                 await _dbContext.UserRoles.AddAsync(role);
@@ -46,6 +48,8 @@ namespace BarberShop.Application.EntitiesCQ.UserRole.Services
                     UserId = userId,
                     UserRole = role,
                     CreatedIp = userIp,
+                    CreatedDate = DateTime.Now,
+                    IsActive = true
                 });
             }
             else

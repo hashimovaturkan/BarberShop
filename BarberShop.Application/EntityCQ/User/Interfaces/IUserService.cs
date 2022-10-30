@@ -20,6 +20,7 @@ namespace BarberShop.Application.EntitiesCQ.User.Interfaces
         Task<int> CreateAsync(CreateUserCommand createUserDto);
         Task<bool> SendSms(string phoneNumber);
 
+        Task<List<UserListVm>> GetList();
         Task<UserDetailsVm> Get(int userId);
         Task<int> Update(UpdateUserCommand userDto);
     }

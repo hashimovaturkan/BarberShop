@@ -231,5 +231,18 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             return user.Id;
         }
+
+        public async Task<List<UserListVm>> GetList()
+        {
+            var users = await _dbContext.Users
+                .Include(e => e.Filial)
+                .Include(e => e.UserRoleRelations)
+                .ThenInclude(e => e.UserRole)
+                .Where(e => e.IsActive && e.UserRoleRelations.Select(k => k.UserRole.Name).Contains("User")).ToListAsync();
+
+            var vm = _mapper.Map<List<UserListVm>>(users);
+
+            return vm;
+        }
     }
 }

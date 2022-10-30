@@ -127,6 +127,13 @@ namespace BarberShop.WebApi.Controllers
             return Ok(userId);
         }
 
+        [HttpGet("/api/UserList")]
+        public async Task<ActionResult<List<UserListVm>>> GetAll()
+        {
+            var vm = await _userService.GetList();
+
+            return Ok(vm);
+        }
 
         [HttpGet]
         public async Task<ActionResult<UserDetailsVm>> UserDetails()
