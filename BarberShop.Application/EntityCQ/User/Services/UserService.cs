@@ -7,6 +7,7 @@ using BarberShop.Application.EntitiesCQ.User.Commands.CreateUser;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
+using BarberShop.Application.EntityCQ.User.Queries.UserList;
 using BarberShop.Application.Models.Vm.User;
 using BarberShop.Application.Repos;
 using BarberShop.Domain;
@@ -232,17 +233,26 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             return user.Id;
         }
 
-        public async Task<List<UserListVm>> GetList()
+        public async Task<UserLookUpDto> GetList(GetUserListQuery query)
         {
-            var users = await _dbContext.Users
+            var users = _dbContext.Users
                 .Include(e => e.Filial)
                 .Include(e => e.UserRoleRelations)
                 .ThenInclude(e => e.UserRole)
-                .Where(e => e.IsActive && e.UserRoleRelations.Select(k => k.UserRole.Name).Contains("User")).ToListAsync();
+                .Where(e => e.IsActive && e.UserRoleRelations.Select(k => k.UserRole.Name).Contains("User"));
 
-            var vm = _mapper.Map<List<UserListVm>>(users);
+            if (query.SearchingWord != null)
+                users = users.Where(e => e.Name.ToLower().Contains(query.SearchingWord.ToLower()) || e.Surname.ToLower().Contains(query.SearchingWord.ToLower()));
 
-            return vm;
+            var userList = _mapper.Map<List<UserListVm>>(await users.ToListAsync());
+
+            var lookUpDto = new UserLookUpDto
+            {
+                Count = userList.Count,
+                Users = userList
+            };
+
+            return lookUpDto;
         }
     }
 }

@@ -4,6 +4,7 @@ using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
+using BarberShop.Application.EntityCQ.User.Queries.UserList;
 using BarberShop.Application.Enums;
 using BarberShop.Application.Models.Dto.User;
 using BarberShop.Application.Models.Vm.User;
@@ -128,9 +129,10 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpGet("/api/UserList")]
-        public async Task<ActionResult<List<UserListVm>>> GetAll()
+        public async Task<ActionResult<UserLookUpDto>> GetAll([FromQuery] GetUserListDto request)
         {
-            var vm = await _userService.GetList();
+            var query = _mapper.Map<GetUserListQuery>(request);
+            var vm = await _userService.GetList(query);
 
             return Ok(vm);
         }

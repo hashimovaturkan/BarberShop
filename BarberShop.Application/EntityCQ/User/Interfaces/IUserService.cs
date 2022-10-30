@@ -8,6 +8,7 @@ using BarberShop.Application.Models.Dto.User;
 using MediatR;
 using IntraNet.Application.Models.Vm.User;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
+using BarberShop.Application.EntityCQ.User.Queries.UserList;
 
 namespace BarberShop.Application.EntitiesCQ.User.Interfaces
 {
@@ -20,7 +21,7 @@ namespace BarberShop.Application.EntitiesCQ.User.Interfaces
         Task<int> CreateAsync(CreateUserCommand createUserDto);
         Task<bool> SendSms(string phoneNumber);
 
-        Task<List<UserListVm>> GetList();
+        Task<UserLookUpDto> GetList(GetUserListQuery query);
         Task<UserDetailsVm> Get(int userId);
         Task<int> Update(UpdateUserCommand userDto);
     }
