@@ -167,3 +167,4 @@ C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\obj\Debug\net6.0\
 C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\obj\Debug\net6.0\BarberShop.WebApi.genruntimeconfig.cache
 C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\obj\Debug\net6.0\ref\BarberShop.WebApi.dll
 C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\BarberShop.WebApi.staticwebassets.runtime.json
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\BarberShop.WebApi.staticwebassets.runtime.json

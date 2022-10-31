@@ -11,8 +11,7 @@ namespace BarberShop.Application.Models.Vm.User
         public int LangId { get; set; } = 1;
         public string Email { get; set; } 
         public string Phone { get; set; } 
-        public string Name { get; set; } 
-        public string Surname { get; set; } 
+        public string FullName { get; set; } 
         
         public void Mapping(Profile profile)
         {

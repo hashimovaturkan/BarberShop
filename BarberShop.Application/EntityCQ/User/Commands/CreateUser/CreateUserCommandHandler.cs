@@ -6,8 +6,7 @@ namespace BarberShop.Application.EntitiesCQ.User.Commands.CreateUser
 {
     public class CreateUserCommand : RequestTemplate
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FullName { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
         public int FilialId { get; set; }

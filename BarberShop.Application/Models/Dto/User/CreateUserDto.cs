@@ -7,8 +7,7 @@ namespace BarberShop.Application.Models.Dto.User
 {
     public class CreateUserDto : IMapWith<CreateUserCommand>
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FullName { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
         public int FilialId { get; set; }

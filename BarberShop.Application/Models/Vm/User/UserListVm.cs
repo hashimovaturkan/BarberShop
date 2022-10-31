@@ -17,8 +17,7 @@ namespace BarberShop.Application.Models.Vm.User
         public string FilialName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FullName { get; set; }
         public string? ImageUrl { get; set; }
 
         public void Mapping(Profile profile)

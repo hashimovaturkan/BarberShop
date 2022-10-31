@@ -17,12 +17,8 @@ namespace BarberShop.Domain
 
         [Required]
         [Column(TypeName = "nvarchar")]
-        [MaxLength(50)]
-        public string Name { get; set; }
-        [Required]
-        [Column(TypeName = "nvarchar")]
-        [MaxLength(50)]
-        public string Surname { get; set; }
+        [MaxLength(500)]
+        public string FullName { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar")]

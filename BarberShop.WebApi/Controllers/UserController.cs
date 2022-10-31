@@ -50,8 +50,7 @@ namespace BarberShop.WebApi.Controllers
                 new("UserId", vm.UserId.ToString()),
                 new("LangId", vm.LangId.ToString()),
                 new("Email", vm.Email),
-                new("Name", vm.Name),
-                new("Surname", vm.Surname),
+                new("FullName", vm.FullName),
                 new("Phone", vm.Phone),
                 new("FilialId", vm.FilialId.ToString()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
@@ -129,7 +128,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpGet("/api/UserList")]
-        public async Task<ActionResult<UserLookUpDto>> GetAll([FromBody] GetUserListDto request)
+        public async Task<ActionResult<UserLookUpDto>> GetAll([FromQuery] GetUserListDto request)
         {
             var query = _mapper.Map<GetUserListQuery>(request);
             var vm = await _userService.GetList(query);

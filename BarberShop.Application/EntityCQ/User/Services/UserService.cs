@@ -119,8 +119,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
                 user = new BarberShop.Domain.User
                 {
-                    Name = request.Name,
-                    Surname = request.Surname,
+                    FullName = request.FullName,
                     Email = request.Email,
                     Phone = request.Phone,
                     Password = passHash,
@@ -245,7 +244,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 .Where(e => e.IsActive && e.UserRoleRelations.Select(k => k.UserRole.Name).Contains("User"));
 
             if (query.SearchingWord != null)
-                users = users.Where(e => e.Name.ToLower().Contains(query.SearchingWord.ToLower()) || e.Surname.ToLower().Contains(query.SearchingWord.ToLower()));
+                users = users.Where(e => e.FullName.ToLower().Contains(query.SearchingWord.ToLower()));
 
             var userList = _mapper.Map<List<UserListVm>>(await users.ToListAsync());
 
