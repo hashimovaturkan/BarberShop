@@ -128,8 +128,8 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     FilialId = request.FilialId,
                     UserStatusId = 1,
                     IsActive = true,
-                    CreatedIp = request.UserIp,
-                    
+                    CreatedIp = request.UserIp
+
                 };
 
                 var isSucces = await SmsVerification.SendSms(request.Phone.PhoneNumber(), userToken.Value);
@@ -227,6 +227,9 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             _mapper.Map(userDto, user);
             user.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
+            if(userDto.Image != null)
+                user.ImageUrl = await userDto.Image.FileUpload();
 
             await _dbContext.SaveChangesAsync(CancellationToken.None);
 

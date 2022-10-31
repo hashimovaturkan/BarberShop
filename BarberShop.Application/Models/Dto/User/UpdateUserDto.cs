@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Mappings;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace BarberShop.Application.Models.Dto.User
         public string Phone { get; set; }
         public int FilialId { get; set; }
         public string Email { get; set; }
+        public IFormFile? Image { get; set; }
 
         public void Mapping(Profile profile)
         {

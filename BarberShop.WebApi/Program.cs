@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using BarberShop.Application.Common.Services;
 using System.Reflection;
 using MediatR;
+using BarberShop.Application.Common.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -121,5 +122,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+
+Extension.Initialize(app.Environment);
 
 app.Run();

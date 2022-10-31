@@ -153,8 +153,11 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<bool>("EmailVerification")
                         .HasColumnType("bit");
 
-                    b.Property<int>("FilialId")
+                    b.Property<int?>("FilialId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -527,9 +530,7 @@ namespace BarberShop.Persistence.Migrations
                 {
                     b.HasOne("BarberShop.Domain.Filial", "Filial")
                         .WithMany("Users")
-                        .HasForeignKey("FilialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FilialId");
 
                     b.HasOne("BarberShop.Domain.UserStatus", "UserStatus")
                         .WithMany("Users")

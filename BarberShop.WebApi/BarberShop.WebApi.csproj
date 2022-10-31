@@ -28,4 +28,8 @@
     <ProjectReference Include="..\BarberShop.Application\BarberShop.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
 </Project>

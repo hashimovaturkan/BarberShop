@@ -97,9 +97,9 @@ namespace BarberShop.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("/api/SendSms")]
-        public async Task<ActionResult<bool>> SendSms(string phoneNumber)
+        public async Task<ActionResult<bool>> SendSms([FromBody] SendSmsDto sendSmsDto)
         {
-            var isSucces = await _userService.SendSms(phoneNumber);
+            var isSucces = await _userService.SendSms(sendSmsDto.PhoneNumber);
 
             if (isSucces)
                 return Ok();
@@ -109,9 +109,9 @@ namespace BarberShop.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("/api/SmsVerification")]
-        public async Task<ActionResult<bool>> SmsVerification(string phoneNumber, string value)
+        public async Task<ActionResult<bool>> SmsVerification([FromBody] SmsVerificationDto sendSmsDto)
         {
-            var isSucces = await _userService.VerifyPhoneNumber(phoneNumber, value);
+            var isSucces = await _userService.VerifyPhoneNumber(sendSmsDto.PhoneNumber, sendSmsDto.Value);
 
             if (isSucces)
                 return Ok();
@@ -121,15 +121,15 @@ namespace BarberShop.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("/api/ResetPassword")]
-        public async Task<ActionResult<bool>> ResetPassword(string phoneNumber, string password)
+        public async Task<ActionResult<bool>> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
         {
-            var userId = await _userService.ResetPassword(phoneNumber, password);
+            var userId = await _userService.ResetPassword(resetPasswordDto.PhoneNumber, resetPasswordDto.Password);
 
             return Ok(userId);
         }
 
         [HttpGet("/api/UserList")]
-        public async Task<ActionResult<UserLookUpDto>> GetAll([FromQuery] GetUserListDto request)
+        public async Task<ActionResult<UserLookUpDto>> GetAll([FromBody] GetUserListDto request)
         {
             var query = _mapper.Map<GetUserListQuery>(request);
             var vm = await _userService.GetList(query);
@@ -146,7 +146,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto)
+        public async Task<IActionResult> Update([FromForm] UpdateUserDto updateUserDto)
         {
             var command = _mapper.Map<UpdateUserCommand>(updateUserDto);
             command.UserId = UserId;

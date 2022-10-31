@@ -6,14 +6,14 @@ namespace BarberShop.Domain
 {
     public class Template :BaseEntity, ITrack
     {
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [Required]
         [Column(TypeName = "varchar")]
         [MaxLength(20)]
         public string CreatedIp { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
        

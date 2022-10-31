@@ -4,7 +4,7 @@ using BarberShop.Application.Models.Template;
 using System;
 using System.Collections.Generic;
 
-namespace BarberShop.Application.Common.Extension
+namespace BarberShop.Application.Common.Extensions
 {
     public static partial class Extension
     {

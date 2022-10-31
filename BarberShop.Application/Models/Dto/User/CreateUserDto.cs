@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Mappings;
 using BarberShop.Application.EntitiesCQ.User.Commands.CreateUser;
+using Microsoft.AspNetCore.Http;
 
 namespace BarberShop.Application.Models.Dto.User
 {

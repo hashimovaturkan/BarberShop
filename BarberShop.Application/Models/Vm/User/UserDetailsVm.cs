@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.Common.Mappings;
 using BarberShop.Application.Models.Vm.User;
 using BarberShop.Domain;
@@ -15,6 +16,7 @@ namespace IntraNet.Application.Models.Vm.User
         public string Phone { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string? ImageUrl { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -22,7 +24,9 @@ namespace IntraNet.Application.Models.Vm.User
                 .ForMember(userLoginVm => userLoginVm.Id,
                     opt => opt.MapFrom(user => user.Id))
                 .ForMember(userLoginVm => userLoginVm.FilialName,
-                    opt => opt.MapFrom(user => user.Filial.Name));
+                    opt => opt.MapFrom(user => user.Filial.Name))
+                .ForMember(userLoginVm => userLoginVm.ImageUrl,
+                    opt => opt.MapFrom(user => user.ImageUrl.GetFile()));
         }
     }
 }
