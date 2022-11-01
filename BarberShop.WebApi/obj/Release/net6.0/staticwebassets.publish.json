@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "hty9IYoo1EzLEjaUcTjn+T0Hq/VJOqpuzWA63U1YT30=",
+  "Hash": "445yTr/K5fPaMFbZLi8rGGX3H3b4aA+TZZ6aYPIDNKs=",
   "Source": "BarberShop.WebApi",
   "BasePath": "_content/BarberShop.WebApi",
   "Mode": "Default",
   "ManifestType": "Publish",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "BarberShop.WebApi\\wwwroot",
+      "Source": "BarberShop.WebApi",
+      "ContentRoot": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
+      "BasePath": "_content/BarberShop.WebApi",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

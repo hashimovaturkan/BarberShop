@@ -123,6 +123,4 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-Extension.Initialize(app.Environment);
-
 app.Run();

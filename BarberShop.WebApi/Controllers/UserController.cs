@@ -127,8 +127,8 @@ namespace BarberShop.WebApi.Controllers
             return Ok(userId);
         }
 
-        [HttpGet("/api/UserList")]
-        public async Task<ActionResult<UserLookUpDto>> GetAll([FromQuery] GetUserListDto request)
+        [HttpPost("/api/UserList")]
+        public async Task<ActionResult<UserLookUpDto>> GetAll([FromBody] GetUserListDto request)
         {
             var query = _mapper.Map<GetUserListQuery>(request);
             var vm = await _userService.GetList(query);

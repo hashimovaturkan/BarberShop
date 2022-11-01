@@ -23,9 +23,9 @@ namespace IntraNet.Application.Models.Vm.User
                 .ForMember(userLoginVm => userLoginVm.Id,
                     opt => opt.MapFrom(user => user.Id))
                 .ForMember(userLoginVm => userLoginVm.FilialName,
-                    opt => opt.MapFrom(user => user.Filial.Name))
-                .ForMember(userLoginVm => userLoginVm.ImageUrl,
-                    opt => opt.MapFrom(user => user.ImageUrl.GetFile()));
+                    opt => opt.MapFrom(user => user.Filial.Name));
+                //.ForMember(userLoginVm => userLoginVm.ImageUrl,
+                //    opt => opt.MapFrom(user => user.ImageUrl.GetFile(_environment)));
         }
     }
 }

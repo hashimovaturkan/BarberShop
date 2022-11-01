@@ -215,6 +215,8 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             var vm = _mapper.Map<UserDetailsVm>(user);
 
+            vm.ImageUrl = user.ImageUrl.GetFile(_environment);
+
             return vm;
         }
 
@@ -228,7 +230,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             user.UpdatedDate = DateTime.UtcNow.AddHours(4);
 
             if(userDto.Image != null)
-                user.ImageUrl = await userDto.Image.FileUpload();
+                user.ImageUrl = await userDto.Image.FileUpload(_environment);
 
             await _dbContext.SaveChangesAsync(CancellationToken.None);
 
@@ -247,6 +249,11 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 users = users.Where(e => e.FullName.ToLower().Contains(query.SearchingWord.ToLower()));
 
             var userList = _mapper.Map<List<UserListVm>>(await users.ToListAsync());
+
+            foreach (var user in userList)
+            {
+                user.ImageUrl = user.ImageUrl.GetFile(_environment);
+            }
 
             var lookUpDto = new UserLookUpDto
             {
