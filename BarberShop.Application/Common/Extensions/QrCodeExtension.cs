@@ -17,7 +17,6 @@ namespace BarberShop.Application.Common.Extensions
         public static string QrCodeGenerate(this string number, IWebHostEnvironment _environment)
         {
             GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(number, 200);
-            barcode.AddBarcodeValueTextBelowBarcode();
 
             barcode.SetMargins(10);
             barcode.ChangeBarCodeColor(Color.Black);

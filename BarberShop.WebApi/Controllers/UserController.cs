@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.EntitiesCQ.User.Commands.CreateUser;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
@@ -25,12 +26,14 @@ namespace BarberShop.WebApi.Controllers
         private readonly IUserService _userService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _environment;
         private readonly IUserRoleService _userRoleService;
 
-        public UserController(IUserService userService, IConfiguration configuration, IMapper mapper,
+        public UserController(IUserService userService, IConfiguration configuration, IMapper mapper, IWebHostEnvironment environment,
             IUserRoleService userRoleService)
         {
             _userService = userService;
+            _environment = environment;
             (_configuration, _mapper) = (configuration, mapper);
             _userRoleService = userRoleService;
         }
@@ -159,6 +162,11 @@ namespace BarberShop.WebApi.Controllers
 
         }
 
-
+        [HttpGet("api/QRCode")]
+        public async Task<ActionResult<string>> GetQrCode()
+        {
+            var url = UserId.ToString().QrCodeGenerate(_environment);
+            return Ok(url);
+        }
     }
 }

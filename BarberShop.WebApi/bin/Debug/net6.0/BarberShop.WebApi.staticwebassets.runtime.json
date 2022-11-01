@@ -1,1 +1,1 @@
-{"ContentRoots":["D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\"],"Root":{"Children":null,"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}
+{"ContentRoots":["D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\"],"Root":{"Children":{"qrImage":{"Children":{"qrcode.png":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"qrImage/qrcode.png"},"Patterns":null}},"Asset":null,"Patterns":null}},"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}
