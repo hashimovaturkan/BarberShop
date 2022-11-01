@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "445yTr/K5fPaMFbZLi8rGGX3H3b4aA+TZZ6aYPIDNKs=",
+  "Hash": "VU0R27jLyCF39l9yVXd+TG9rP2pDNOK3ubtNdndQ8vg=",
   "Source": "BarberShop.WebApi",
   "BasePath": "_content/BarberShop.WebApi",
   "Mode": "Default",
@@ -15,5 +15,23 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\qrImage\\qrcode.png",
+      "SourceId": "BarberShop.WebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
+      "BasePath": "_content/BarberShop.WebApi",
+      "RelativePath": "qrImage/qrcode.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\qrImage\\qrcode.png"
+    }
+  ]
 }

@@ -6,9 +6,12 @@ D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\Pu
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\BarberShop.WebApi.pdb
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\AutoMapper.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\IronBarCode.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\BitMiracle.LibTiff.NET.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\FluentValidation.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\FluentValidation.AspNetCore.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\IronSoftware.Drawing.Common.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\JWT.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\MediatR.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\MediatR.Contracts.dll
@@ -30,10 +33,14 @@ D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\Pu
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\MoreLinq.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\QRCoder.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\RestSharp.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Sentry.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Sentry.AspNetCore.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Sentry.Extensions.Logging.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\SixLabors.Fonts.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\SixLabors.ImageSharp.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\SixLabors.ImageSharp.Drawing.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -44,6 +51,8 @@ D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\Pu
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\zxing.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\ZXing.ImageSharp.V2.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll

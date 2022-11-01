@@ -162,7 +162,7 @@ namespace BarberShop.WebApi.Controllers
 
         }
 
-        [HttpGet("api/QRCode")]
+        [HttpGet("QRCode")]
         public async Task<ActionResult<string>> GetQrCode()
         {
             var url = UserId.ToString().QrCodeGenerate(_environment);

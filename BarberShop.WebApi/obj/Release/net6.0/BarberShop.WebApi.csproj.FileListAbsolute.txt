@@ -167,3 +167,12 @@ C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\obj\Release\net6.
 C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\BarberShop.WebApi.genruntimeconfig.cache
 C:\Users\turkan.hashimova\Desktop\BarberShop\BarberShop.WebApi\obj\Release\net6.0\ref\BarberShop.WebApi.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\BarberShop.WebApi.staticwebassets.runtime.json
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\IronBarCode.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\BitMiracle.LibTiff.NET.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\IronSoftware.Drawing.Common.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\QRCoder.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\SixLabors.Fonts.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\SixLabors.ImageSharp.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\SixLabors.ImageSharp.Drawing.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\zxing.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Release\net6.0\ZXing.ImageSharp.V2.dll
