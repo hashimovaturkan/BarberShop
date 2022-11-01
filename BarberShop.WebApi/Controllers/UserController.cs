@@ -13,6 +13,7 @@ using IntraNet.Application.Models.Vm.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using QRCoder;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -127,6 +128,7 @@ namespace BarberShop.WebApi.Controllers
             return Ok(userId);
         }
 
+
         [HttpPost("/api/UserList")]
         public async Task<ActionResult<UserLookUpDto>> GetAll([FromBody] GetUserListDto request)
         {
@@ -153,7 +155,10 @@ namespace BarberShop.WebApi.Controllers
             await _userService.Update(command);
 
             return NoContent();
+
+
         }
+
 
     }
 }
