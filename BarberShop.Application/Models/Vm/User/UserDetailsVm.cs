@@ -16,6 +16,7 @@ namespace IntraNet.Application.Models.Vm.User
         public string Phone { get; set; }
         public string FullName { get; set; }
         public string? ImageUrl { get; set; }
+        public string? QrCodeUrl { get; set; }
 
         public void Mapping(Profile profile)
         {

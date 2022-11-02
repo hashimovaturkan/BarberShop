@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoreLinq;
+using Newtonsoft.Json;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
 {
@@ -216,6 +217,9 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             var vm = _mapper.Map<UserDetailsVm>(user);
 
             vm.ImageUrl = user.ImageUrl.GetFile(_environment);
+            //var a = JsonConvert.SerializeObject(user);
+
+            vm.QrCodeUrl = userId.ToString().QrCodeGenerate(_environment);
 
             return vm;
         }

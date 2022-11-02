@@ -23,6 +23,7 @@ namespace BarberShop.Persistence
         public virtual DbSet<Filial> Filials { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Lang> Langs { get; set; }
+        public virtual DbSet<Barber> Barbers { get; set; }
 
         public BarberShopDbContext(DbContextOptions<BarberShopDbContext> options)
             : base(options) { }

@@ -177,3 +177,6 @@ D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\SixL
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\SixLabors.ImageSharp.Drawing.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\zxing.dll
 D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\ZXing.ImageSharp.V2.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Lesson\Projects\BarberShop\BarberShop\BarberShop.WebApi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

@@ -14,9 +14,9 @@ namespace BarberShop.Application.Common.Extensions
 {
     public static partial class Extension
     {
-        public static string QrCodeGenerate(this string number, IWebHostEnvironment _environment)
+        public static string QrCodeGenerate(this string userDetails, IWebHostEnvironment _environment)
         {
-            GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(number, 200);
+            GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(userDetails, 200);
 
             barcode.SetMargins(10);
             barcode.ChangeBarCodeColor(Color.Black);

@@ -11,6 +11,12 @@ using BarberShop.Application.Common.Services;
 using System.Reflection;
 using MediatR;
 using BarberShop.Application.Common.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +30,8 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -48,7 +56,11 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers()
-    .AddFluentValidationCustom();
+.AddFluentValidationCustom();
+//.AddJsonOptions(x =>x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
+//.AddNewtonsoftJson(x =>
+// x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 builder.Services.AddCors(opt => opt.AddPolicy("AllowAll", policy =>
 {
