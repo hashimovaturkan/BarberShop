@@ -12,12 +12,14 @@ using BarberShop.Application.Models.Vm.User;
 using BarberShop.Application.Repos;
 using BarberShop.Domain;
 using BarberShop.Persistence;
+using BarberShop.Persistence.Migrations;
 using IntraNet.Application.Models.Vm.User;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoreLinq;
-using Newtonsoft.Json;
+using System.Web;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
 {
@@ -29,12 +31,14 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
         private readonly UriService _uriService;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
+        readonly IHttpContextAccessor httpContextAccessor;
 
-        public UserService(UserRepo userRepo,BarberShopDbContext dbContext, IMapper mapper, UriService uriService,
+        public UserService(IHttpContextAccessor httpContextAccessor,UserRepo userRepo,BarberShopDbContext dbContext, IMapper mapper, UriService uriService,
             IWebHostEnvironment environment, IConfiguration configuration)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            this.httpContextAccessor = httpContextAccessor;
             _userRepo = userRepo;
             _uriService = uriService;
             _environment = environment;
@@ -216,8 +220,9 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             var vm = _mapper.Map<UserDetailsVm>(user);
 
-            vm.ImageUrl = user.ImageUrl.GetFile(_environment);
-            //var a = JsonConvert.SerializeObject(user);
+            //vm.ImageUrl = user.ImageUrl.GetFile(_environment);
+            if(user.PhotoId != null)
+                vm.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)user.PhotoId);
 
             vm.QrCodeUrl = userId.ToString().QrCodeGenerate(_environment);
 
@@ -233,8 +238,18 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             _mapper.Map(userDto, user);
             user.UpdatedDate = DateTime.UtcNow.AddHours(4);
 
-            if(userDto.Image != null)
-                user.ImageUrl = await userDto.Image.FileUpload(_environment);
+            BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+            if (userDto.Image != null)
+            {
+                photo = new()
+                {
+                    Name = userDto.Image.FileName,
+                    Path = userDto.Image.SaveFileToFolderAndGetPath(),
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedIp = "::1"
+                };
+            }
+            user.Photo = photo;
 
             await _dbContext.SaveChangesAsync(CancellationToken.None);
 
@@ -256,7 +271,8 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             foreach (var user in userList)
             {
-                user.ImageUrl = user.ImageUrl.GetFile(_environment);
+                if(user.PhotoId != null)
+                    user.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)user.PhotoId);
             }
 
             var lookUpDto = new UserLookUpDto

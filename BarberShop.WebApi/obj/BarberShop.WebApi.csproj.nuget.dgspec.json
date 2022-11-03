@@ -53,10 +53,6 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
-            "BarCode": {
-              "target": "Package",
-              "version": "[2022.10.9871, )"
-            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.2.2, )"
@@ -105,6 +101,10 @@
               "target": "Package",
               "version": "[2.2.8, )"
             },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            },
             "RestSharp": {
               "target": "Package",
               "version": "[108.0.2, )"
@@ -112,6 +112,14 @@
             "System.Collections": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "ZXing.Net.Bindings.Windows.Compatibility": {
+              "target": "Package",
+              "version": "[0.16.10, )"
             },
             "morelinq": {
               "target": "Package",

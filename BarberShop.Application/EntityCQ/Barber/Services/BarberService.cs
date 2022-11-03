@@ -11,8 +11,10 @@ using BarberShop.Application.Models.Vm.Filial;
 using BarberShop.Application.Models.Vm.User;
 using BarberShop.Domain;
 using BarberShop.Persistence;
+using BarberShop.Persistence.Migrations;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -29,20 +31,33 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
         private readonly UriService _uriService;
-        public BarberService(BarberShopDbContext dbContext, IMapper mapper, IWebHostEnvironment environment, UriService uriService)
+        readonly IHttpContextAccessor httpContextAccessor;
+        public BarberService(IHttpContextAccessor httpContextAccessor,BarberShopDbContext dbContext, IMapper mapper, IWebHostEnvironment environment, UriService uriService)
         {
             this._dbContext = dbContext;
             this._mapper = mapper;
             this._environment = environment;
             this._uriService = uriService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<int> Create(CreateBarberCommand dto)
         {
             Domain.Barber barber = _mapper.Map<Domain.Barber>(dto);
-
+            Domain.Photo photo = new Domain.Photo();
             if (dto.Image != null)
-                barber.ImageUrl = await dto.Image.FileUpload(_environment);
+            {
+                photo = new()
+                {
+                    Name = dto.Image.FileName,
+                    Path = dto.Image.SaveFileToFolderAndGetPath(),
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedIp = "::1"
+                };
+            }
+
+            barber.Photo = photo;
+            //barber.ImageUrl = await dto.Image.FileUpload(_environment);
 
             await _dbContext.Barbers.AddAsync(barber, CancellationToken.None);
             await _dbContext.SaveChangesAsync(CancellationToken.None);
@@ -52,11 +67,14 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
 
         public async Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route)
         {
-            var barbers = _dbContext.Barbers.Where(e => e.IsActive);
+            var barbers = _dbContext.Barbers.Include(e => e.Photo).Where(e => e.IsActive);
 
-            foreach (var barber in barbers)
+            List<BarberListDto> barberLookupDtoList = _mapper.Map<List<BarberListDto>>(barbers);
+            foreach (var barber in barberLookupDtoList)
             {
-                barber.ImageUrl = barber.ImageUrl.GetFile(_environment);
+                if(barber.PhotoId != null)
+                    barber.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)barber.PhotoId);
+
             }
 
             PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
@@ -66,7 +84,6 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
             List<Domain.Barber> surveyPaged = await surveyPagedQuery.OrderByDescending(e => e.CreatedDate).ToListAsync();
 
             List<BarberListDto> surveyLookupDtoList = _mapper.Map<List<BarberListDto>>(surveyPaged);
-
 
             ResponseListTemplate<List<BarberListDto>> result = surveyLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, route);
 

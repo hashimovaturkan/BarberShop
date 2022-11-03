@@ -8,9 +8,10 @@ namespace BarberShop.Domain
 {
     public class Barber : Template
     {
-        public string ImageUrl { get; set; }
+        public int? PhotoId { get; set; }
         public string Name { get; set; }
 
         public int Priority { get; set; }
+        public virtual Photo Photo { get; set; }
     }
 }

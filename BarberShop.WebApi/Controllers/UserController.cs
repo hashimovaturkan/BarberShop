@@ -157,6 +157,7 @@ namespace BarberShop.WebApi.Controllers
             command.UserIp = UserIp;
             await _userService.Update(command);
 
+
             return NoContent();
 
 

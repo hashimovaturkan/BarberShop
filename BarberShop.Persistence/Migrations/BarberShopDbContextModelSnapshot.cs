@@ -41,16 +41,15 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PhotoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
@@ -59,6 +58,8 @@ namespace BarberShop.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PhotoId");
 
                     b.ToTable("Barbers");
                 });
@@ -167,6 +168,44 @@ namespace BarberShop.Persistence.Migrations
                     b.ToTable("Langs");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -202,9 +241,6 @@ namespace BarberShop.Persistence.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -220,6 +256,9 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<bool>("PhoneVerification")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("PhotoId")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("Salt")
                         .HasColumnType("uniqueidentifier");
 
@@ -232,6 +271,8 @@ namespace BarberShop.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FilialId");
+
+                    b.HasIndex("PhotoId");
 
                     b.HasIndex("UserStatusId");
 
@@ -553,6 +594,15 @@ namespace BarberShop.Persistence.Migrations
                     b.ToTable("UserTokenTypes");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.Barber", b =>
+                {
+                    b.HasOne("BarberShop.Domain.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+
+                    b.Navigation("Photo");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.ErrorLog", b =>
                 {
                     b.HasOne("BarberShop.Domain.User", "User")
@@ -568,6 +618,10 @@ namespace BarberShop.Persistence.Migrations
                         .WithMany("Users")
                         .HasForeignKey("FilialId");
 
+                    b.HasOne("BarberShop.Domain.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+
                     b.HasOne("BarberShop.Domain.UserStatus", "UserStatus")
                         .WithMany("Users")
                         .HasForeignKey("UserStatusId")
@@ -575,6 +629,8 @@ namespace BarberShop.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Filial");
+
+                    b.Navigation("Photo");
 
                     b.Navigation("UserStatus");
                 });

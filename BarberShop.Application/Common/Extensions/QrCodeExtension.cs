@@ -5,10 +5,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IronBarCode;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using QRCoder;
+using ZXing.QrCode;
+using ZXing;
 
 namespace BarberShop.Application.Common.Extensions
 {
@@ -16,21 +18,50 @@ namespace BarberShop.Application.Common.Extensions
     {
         public static string QrCodeGenerate(this string userDetails, IWebHostEnvironment _environment)
         {
-            GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(userDetails, 200);
+            var writer = new QRCodeWriter();
+            var resultBit = writer.encode(userDetails, BarcodeFormat.QR_CODE, 200, 200);
+            var matrix = resultBit;
+            int scale = 1;
+            Bitmap result = new Bitmap(matrix.Width * scale, matrix.Height * scale);
 
-            barcode.SetMargins(10);
-            barcode.ChangeBarCodeColor(Color.Black);
+            for (int x = 0; x < matrix.Height; x++)
+            {
+                for (int y = 0; y < matrix.Width; y++)
+                {
+                    Color pixel = matrix[x,y] ? Color.Black : Color.White;
 
-            var imageUrl = $"qrcode.png";
+                    for (int i = 0; i < scale; i++)
+                    {
+                        for (int j = 0; j < scale; j++)
+                        {
+                            result.SetPixel(x * scale + i, y * scale + j, pixel);
+                        }
+                    }
+                }
+            }
 
-            string physicalFileName = Path.Combine(_environment.ContentRootPath,
-                                                   "wwwroot",
-                                                   "qrImage",
-                                                   imageUrl);
+            string webRootPath = _environment.WebRootPath;
+            result.Save(webRootPath + "\\qrImage\\qrcode.png");
 
-            barcode.SaveAsPng(physicalFileName);
+            return webRootPath + "\\qrImage\\qrcode.png";
 
-            return physicalFileName;
+
+
+            //GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(userDetails, 200);
+
+            //barcode.SetMargins(10);
+            //barcode.ChangeBarCodeColor(Color.Black);
+
+            //var imageUrl = $"qrcode.png";
+
+            //string physicalFileName = Path.Combine(_environment.ContentRootPath,
+            //                                       "wwwroot",
+            //                                       "qrImage",
+            //                                       imageUrl);
+
+            //barcode.SaveAsPng(physicalFileName);
+
+            //return physicalFileName;
         }
     }
 }

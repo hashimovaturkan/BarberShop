@@ -19,6 +19,7 @@ namespace BarberShop.Application.Models.Vm.User
         public string Phone { get; set; }
         public string FullName { get; set; }
         public string? ImageUrl { get; set; }
+        public int? PhotoId { get; set; }
 
         public void Mapping(Profile profile)
         {

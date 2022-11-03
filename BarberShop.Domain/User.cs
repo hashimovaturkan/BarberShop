@@ -35,13 +35,14 @@ namespace BarberShop.Domain
         public string Password { get; set; }
 
         public Guid Salt { get; set; }
-        public string? ImageUrl { get; set; }
+        public int? PhotoId { get; set; }
         public int UserStatusId { get; set; }
         public int? FilialId { get; set; }
 
         public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
         public virtual UserStatus UserStatus { get; set; }
         public virtual Filial Filial { get; set; }
+        public virtual Photo Photo { get; set; }
         public virtual ICollection<UserRoleRelation> UserRoleRelations { get; set; }
         public virtual ICollection<UserToken> UserTokens { get; set; }
     }

@@ -41,7 +41,6 @@ namespace BarberShop.WebApi.Controllers
                 query.PageSize = 20;
 
             var vm = await _barberService.GetList(query, Request.Path.Value);
-
             return Ok(vm);
         }
 
