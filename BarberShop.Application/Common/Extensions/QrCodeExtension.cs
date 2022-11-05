@@ -40,10 +40,11 @@ namespace BarberShop.Application.Common.Extensions
                 }
             }
 
+            var url = "qrcode" + userDetails + ".png";
             string webRootPath = _environment.WebRootPath;
-            result.Save(webRootPath + "\\qrImage\\qrcode.png");
+            result.Save(webRootPath + $"\\uploads\\{url}");
 
-            return webRootPath + "\\qrImage\\qrcode.png";
+            return webRootPath + $"\\uploads\\{url}";
 
 
 

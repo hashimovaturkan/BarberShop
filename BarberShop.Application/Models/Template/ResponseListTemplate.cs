@@ -4,8 +4,8 @@ namespace BarberShop.Application.Models.Template
 {
     public class ResponseListTemplate<T> : ResponseTemplate<T>
     {
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
+        public int Number { get; set; }
+        public int Size { get; set; }
         public Uri? FirstPage { get; set; }
         public Uri? LastPage { get; set; }
         public int TotalPages { get; set; }
@@ -15,8 +15,8 @@ namespace BarberShop.Application.Models.Template
 
         public ResponseListTemplate(T data, int pageNumber, int pageSize/*, int totalRecords*/)
         {
-            PageNumber = pageNumber;
-            PageSize = pageSize;
+            Number = pageNumber;
+            Size = pageSize;
             //TotalPages = totalRecords;
             //TotalRecords = (int)Math.Ceiling((decimal)totalRecords / (decimal)pageSize);
             Data = data;

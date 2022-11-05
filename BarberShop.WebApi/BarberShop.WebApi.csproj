@@ -30,9 +30,4 @@
     <ProjectReference Include="..\BarberShop.Application\BarberShop.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\qrImage\" />
-    <Folder Include="wwwroot\uploads\" />
-  </ItemGroup>
-
 </Project>

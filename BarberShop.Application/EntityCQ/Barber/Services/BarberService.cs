@@ -69,21 +69,20 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
         {
             var barbers = _dbContext.Barbers.Include(e => e.Photo).Where(e => e.IsActive);
 
-            List<BarberListDto> barberLookupDtoList = _mapper.Map<List<BarberListDto>>(barbers);
-            foreach (var barber in barberLookupDtoList)
-            {
-                if(barber.PhotoId != null)
-                    barber.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)barber.PhotoId);
 
-            }
-
-            PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
+            PaginationFilter paginationFilter = new PaginationFilter(query.Number, query.Size);
             IQueryable<Domain.Barber> surveyPagedQuery = paginationFilter.GetPagedList(barbers);
 
             int totalRecords = await barbers.CountAsync();
-            List<Domain.Barber> surveyPaged = await surveyPagedQuery.OrderByDescending(e => e.CreatedDate).ToListAsync();
+            List<Domain.Barber> surveyPaged = await surveyPagedQuery.OrderByDescending(e => e.Priority).ToListAsync();
 
             List<BarberListDto> surveyLookupDtoList = _mapper.Map<List<BarberListDto>>(surveyPaged);
+            foreach (var barber in surveyLookupDtoList)
+            {
+                if (barber.PhotoId != null)
+                    barber.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)barber.PhotoId);
+
+            }
 
             ResponseListTemplate<List<BarberListDto>> result = surveyLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, route);
 

@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoreLinq;
 using System.Web;
+using Photo = BarberShop.Domain.Photo;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
 {
@@ -71,6 +72,22 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             if ((request.Password + user.Salt.ToString()) != passHash)
                 throw new UnauthorizedException($"User not exist");
+
+            if(user.QrCodeId == null)
+            {
+                var url = user.Id.ToString().QrCodeGenerate(_environment);
+                Photo photo = new()
+                {
+                    Name =  "qrcode.png",
+                    Path = url,
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedIp = "::1"
+                };
+
+                user.QrCode = photo;
+
+                await _dbContext.Photos.AddAsync(photo);
+            }
             
             UserLoginVm userLoginVm = _mapper.Map<UserLoginVm>(user);
 
@@ -220,11 +237,10 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             var vm = _mapper.Map<UserDetailsVm>(user);
 
-            //vm.ImageUrl = user.ImageUrl.GetFile(_environment);
             if(user.PhotoId != null)
                 vm.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)user.PhotoId);
 
-            vm.QrCodeUrl = userId.ToString().QrCodeGenerate(_environment);
+            vm.QrCodeUrl = httpContextAccessor.GeneratePhotoUrl((int)user.QrCodeId);
 
             return vm;
         }

@@ -36,6 +36,7 @@ namespace BarberShop.Domain
 
         public Guid Salt { get; set; }
         public int? PhotoId { get; set; }
+        public int? QrCodeId { get; set; }
         public int UserStatusId { get; set; }
         public int? FilialId { get; set; }
 
@@ -43,6 +44,7 @@ namespace BarberShop.Domain
         public virtual UserStatus UserStatus { get; set; }
         public virtual Filial Filial { get; set; }
         public virtual Photo Photo { get; set; }
+        public virtual Photo QrCode { get; set; }
         public virtual ICollection<UserRoleRelation> UserRoleRelations { get; set; }
         public virtual ICollection<UserToken> UserTokens { get; set; }
     }

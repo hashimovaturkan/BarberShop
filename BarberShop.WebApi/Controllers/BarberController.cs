@@ -35,10 +35,10 @@ namespace BarberShop.WebApi.Controllers
         [HttpPost("BarberList")]
         public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get(GetBarberListQuery query)
         {
-            if (query.PageNumber == 0)
-                query.PageNumber = 1;
-            if (query.PageSize == 0)
-                query.PageSize = 20;
+            if (query.Number == 0)
+                query.Number = 1;
+            if (query.Size == 0)
+                query.Size = 20;
 
             var vm = await _barberService.GetList(query, Request.Path.Value);
             return Ok(vm);

@@ -259,6 +259,9 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<int?>("PhotoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("QrCodeId")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("Salt")
                         .HasColumnType("uniqueidentifier");
 
@@ -273,6 +276,8 @@ namespace BarberShop.Persistence.Migrations
                     b.HasIndex("FilialId");
 
                     b.HasIndex("PhotoId");
+
+                    b.HasIndex("QrCodeId");
 
                     b.HasIndex("UserStatusId");
 
@@ -622,6 +627,10 @@ namespace BarberShop.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("PhotoId");
 
+                    b.HasOne("BarberShop.Domain.Photo", "QrCode")
+                        .WithMany()
+                        .HasForeignKey("QrCodeId");
+
                     b.HasOne("BarberShop.Domain.UserStatus", "UserStatus")
                         .WithMany("Users")
                         .HasForeignKey("UserStatusId")
@@ -631,6 +640,8 @@ namespace BarberShop.Persistence.Migrations
                     b.Navigation("Filial");
 
                     b.Navigation("Photo");
+
+                    b.Navigation("QrCode");
 
                     b.Navigation("UserStatus");
                 });
