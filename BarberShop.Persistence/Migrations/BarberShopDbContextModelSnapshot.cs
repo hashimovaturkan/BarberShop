@@ -206,6 +206,132 @@ namespace BarberShop.Persistence.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FilialId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FirstServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReservationStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SecondServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FilialId");
+
+                    b.HasIndex("FirstServiceId");
+
+                    b.HasIndex("ReservationStatusId");
+
+                    b.HasIndex("SecondServiceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("BarberShop.Domain.ReservationStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReservationStatuses");
+                });
+
+            modelBuilder.Entity("BarberShop.Domain.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -617,6 +743,45 @@ namespace BarberShop.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.Reservation", b =>
+                {
+                    b.HasOne("BarberShop.Domain.Filial", "Filial")
+                        .WithMany()
+                        .HasForeignKey("FilialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BarberShop.Domain.Service", "FirstService")
+                        .WithMany()
+                        .HasForeignKey("FirstServiceId");
+
+                    b.HasOne("BarberShop.Domain.ReservationStatus", "ReservationStatus")
+                        .WithMany()
+                        .HasForeignKey("ReservationStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BarberShop.Domain.Service", "SecondService")
+                        .WithMany()
+                        .HasForeignKey("SecondServiceId");
+
+                    b.HasOne("BarberShop.Domain.User", "User")
+                        .WithMany("Reservations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Filial");
+
+                    b.Navigation("FirstService");
+
+                    b.Navigation("ReservationStatus");
+
+                    b.Navigation("SecondService");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
                     b.HasOne("BarberShop.Domain.Filial", "Filial")
@@ -730,6 +895,8 @@ namespace BarberShop.Persistence.Migrations
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
                     b.Navigation("ErrorLogs");
+
+                    b.Navigation("Reservations");
 
                     b.Navigation("UserRoleRelations");
 

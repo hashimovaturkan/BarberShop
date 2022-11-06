@@ -8,6 +8,7 @@ using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
 using BarberShop.Application.Enums;
 using BarberShop.Application.Models.Dto.User;
+using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.User;
 using BarberShop.WebApi.Attributes;
 using IntraNet.Application.Models.Vm.User;
@@ -135,6 +136,11 @@ namespace BarberShop.WebApi.Controllers
         [HttpPost("/api/UserList")]
         public async Task<ActionResult<UserLookUpDto>> GetAll([FromBody] GetUserListDto request)
         {
+            if (request.Number == 0)
+                request.Number = 1;
+            if (request.Size == 0)
+                request.Size = 20;
+
             var query = _mapper.Map<GetUserListQuery>(request);
             var vm = await _userService.GetList(query);
 

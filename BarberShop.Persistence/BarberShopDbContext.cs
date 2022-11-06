@@ -4,6 +4,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using BarberShop.Domain;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Reflection.Emit;
 
 namespace BarberShop.Persistence
 {
@@ -25,6 +27,9 @@ namespace BarberShop.Persistence
         public virtual DbSet<Lang> Langs { get; set; }
         public virtual DbSet<Barber> Barbers { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<ReservationStatus> ReservationStatuses { get; set; }
 
         public BarberShopDbContext(DbContextOptions<BarberShopDbContext> options)
             : base(options) { }

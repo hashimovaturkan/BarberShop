@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BarberShop.Application.Models.Dto.User
 {
-    public class GetUserListDto : IMapWith<GetUserListQuery>
+    public class GetUserListDto : RequestListTemplate, IMapWith<GetUserListQuery>
     {
         public string? SearchingWord { get; set; }
 

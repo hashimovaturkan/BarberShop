@@ -57,7 +57,6 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
             }
 
             barber.Photo = photo;
-            //barber.ImageUrl = await dto.Image.FileUpload(_environment);
 
             await _dbContext.Barbers.AddAsync(barber, CancellationToken.None);
             await _dbContext.SaveChangesAsync(CancellationToken.None);

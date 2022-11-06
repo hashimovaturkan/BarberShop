@@ -12,6 +12,7 @@ namespace BarberShop.Domain
             ErrorLogs = new HashSet<ErrorLog>();
             UserRoleRelations = new HashSet<UserRoleRelation>();
             UserTokens = new HashSet<UserToken>();
+            Reservations = new HashSet<Reservation>();
         }
 
 
@@ -47,5 +48,6 @@ namespace BarberShop.Domain
         public virtual Photo QrCode { get; set; }
         public virtual ICollection<UserRoleRelation> UserRoleRelations { get; set; }
         public virtual ICollection<UserToken> UserTokens { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BarberShop.Application.EntityCQ.User.Queries.UserList
 {
-    public class GetUserListQuery 
+    public class GetUserListQuery : RequestListQueryTemplate
     {
         public string? SearchingWord { get; set; }
     }

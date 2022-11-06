@@ -32,4 +32,8 @@
     <ProjectReference Include="..\BarberShop.Persistence\BarberShop.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityCQ\Reservation\Queries\" />
+  </ItemGroup>
+
 </Project>

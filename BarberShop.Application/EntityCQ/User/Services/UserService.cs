@@ -8,6 +8,7 @@ using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
+using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.User;
 using BarberShop.Application.Repos;
 using BarberShop.Domain;
@@ -280,8 +281,14 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 .ThenInclude(e => e.UserRole)
                 .Where(e => e.IsActive && e.UserRoleRelations.Select(k => k.UserRole.Name).Contains("User"));
 
+
             if (query.SearchingWord != null)
                 users = users.Where(e => e.FullName.ToLower().Contains(query.SearchingWord.ToLower()));
+
+            PaginationFilter paginationFilter = new PaginationFilter(query.Number, query.Size);
+            IQueryable<BarberShop.Domain.User> carOrderRequestPagedQuery = paginationFilter.GetPagedList(users);
+
+            int totalRecords = await users.CountAsync();
 
             var userList = _mapper.Map<List<UserListVm>>(await users.ToListAsync());
 
@@ -291,10 +298,12 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     user.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)user.PhotoId);
             }
 
+            ResponseListTemplate<List<UserListVm>> result = userList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, query.Route);
+
             var lookUpDto = new UserLookUpDto
             {
                 Count = userList.Count,
-                Users = userList
+                Users = result
             };
 
             return lookUpDto;
