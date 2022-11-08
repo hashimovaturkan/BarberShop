@@ -169,5 +169,13 @@ namespace BarberShop.WebApi.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<ActionResult<UserDetailsVm>> UserDetails([FromBody] UserDetailsDto dto)
+        {
+            var user = await _userService.Get(dto.Id);
+
+            return Ok(user);
+        }
+
     }
 }

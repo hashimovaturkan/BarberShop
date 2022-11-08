@@ -21,6 +21,15 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
             this._mapper = mapper;
         }
 
+        public async Task<FilialDetailsVm> Get(int Id)
+        {
+            var filial = await _dbContext.Filials.Where(e => e.IsActive && e.Id == Id).FirstOrDefaultAsync();
+
+            var vm = _mapper.Map<FilialDetailsVm>(filial);
+
+            return vm;
+        }
+
         public async Task<List<FilialListDto>> GetList()
         {
             var filials = await _dbContext.Filials.Where(e => e.IsActive).ToListAsync();

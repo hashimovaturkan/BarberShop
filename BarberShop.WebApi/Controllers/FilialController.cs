@@ -3,9 +3,12 @@ using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
 using BarberShop.Application.EntityCQ.Filial.Interfaces;
 using BarberShop.Application.Enums;
+using BarberShop.Application.Models.Dto.Filial;
+using BarberShop.Application.Models.Dto.User;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.Filial;
 using BarberShop.WebApi.Attributes;
+using IntraNet.Application.Models.Vm.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +37,14 @@ namespace BarberShop.WebApi.Controllers
         {
             var vm = await _filialService.GetList();
             return Ok(vm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<FilialDetailsVm>> Get([FromBody] FilialDetailsDto dto)
+        {
+            var filial = await _filialService.Get(dto.Id);
+
+            return Ok(filial);
         }
     }
 }

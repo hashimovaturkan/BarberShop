@@ -11,5 +11,6 @@ namespace BarberShop.Application.EntityCQ.Filial.Interfaces
     public interface IFilialService : IBaseService
     {
         Task<List<FilialListDto>> GetList();
+        Task<FilialDetailsVm> Get(int Id);
     }
 }
