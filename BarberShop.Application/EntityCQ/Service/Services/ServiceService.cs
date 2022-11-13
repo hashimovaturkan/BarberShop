@@ -5,6 +5,7 @@ using BarberShop.Application.Common.Services;
 using BarberShop.Application.EntityCQ.Service.Interfaces;
 using BarberShop.Application.EntityCQ.Service.Queries;
 using BarberShop.Application.Models.Template;
+using BarberShop.Application.Models.Vm.Filial;
 using BarberShop.Application.Models.Vm.Service;
 using BarberShop.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,15 @@ namespace BarberShop.Application.EntityCQ.Service.Services
             this._uriService = uriService;
             this._dbContext = dbContext;
             this._mapper = mapper;
+        }
+
+        public async Task<List<ServiceLookupDto>> Get()
+        {
+            var filials = await _dbContext.Services.Where(e => e.IsActive).ToListAsync();
+
+            var vm = _mapper.Map<List<ServiceLookupDto>>(filials);
+
+            return vm;
         }
 
         public async Task<ResponseListTemplate<List<ServiceLookupDto>>> GetList(GetServiceListQuery query)

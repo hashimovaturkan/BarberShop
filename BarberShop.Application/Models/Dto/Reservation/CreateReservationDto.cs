@@ -16,7 +16,6 @@ namespace BarberShop.Application.Models.Dto.Reservation
         public DateTime ReservationDate { get; set; }
         public int? FirstServiceId { get; set; }
         public int? SecondServiceId { get; set; }
-        public int FilialId { get; set; }
 
         public void Mapping(Profile profile)
         {

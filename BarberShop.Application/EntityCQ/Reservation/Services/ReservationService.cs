@@ -2,6 +2,7 @@
 using BarberShop.Application.EntityCQ.Reservation.Commands;
 using BarberShop.Application.EntityCQ.Reservation.Interfaces;
 using BarberShop.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace BarberShop.Application.EntityCQ.Reservation.Services
             Domain.Reservation reservation = _mapper.Map<Domain.Reservation>(dto);
 
             reservation.ReservationStatusId = 1;
+            reservation.FilialId =(int) _dbContext.Users.FirstOrDefaultAsync(e => e.Id == dto.UserId).Result.FilialId;
 
             await _dbContext.Reservations.AddAsync(reservation, CancellationToken.None);
             await _dbContext.SaveChangesAsync(CancellationToken.None);

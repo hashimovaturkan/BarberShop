@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
+using BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber;
+using BarberShop.Application.EntityCQ.Filial.Commands;
 using BarberShop.Application.EntityCQ.Filial.Interfaces;
 using BarberShop.Application.Enums;
+using BarberShop.Application.Models.Dto.Barber;
 using BarberShop.Application.Models.Dto.Filial;
 using BarberShop.Application.Models.Dto.User;
 using BarberShop.Application.Models.Template;
@@ -29,6 +32,18 @@ namespace BarberShop.WebApi.Controllers
             _filialService = filialService;
             (_configuration, _mapper) = (configuration, mapper);
             _userRoleService = userRoleService;
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult<int>> Create([FromForm] CreateFilialDto createFilialDto)
+        {
+            var command = _mapper.Map<CreateFilialCommand>(createFilialDto);
+            SetUserInfo();
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            var id = await _filialService.Create(command);
+
+            return Ok(id);
         }
 
         [AllowAnonymous]

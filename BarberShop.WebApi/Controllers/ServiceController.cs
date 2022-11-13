@@ -7,6 +7,7 @@ using BarberShop.Application.EntityCQ.Service.Queries;
 using BarberShop.Application.Enums;
 using BarberShop.Application.Models.Dto.Service;
 using BarberShop.Application.Models.Template;
+using BarberShop.Application.Models.Vm.Filial;
 using BarberShop.Application.Models.Vm.Service;
 using BarberShop.WebApi.Attributes;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,14 @@ namespace BarberShop.WebApi.Controllers
             query.Route = Request.Path.Value;
 
             var vm = await _serviceService.GetList(query);
+            return Ok(vm);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult<List<ServiceLookupDto>>> Get()
+        {
+            var vm = await _serviceService.Get();
             return Ok(vm);
         }
 

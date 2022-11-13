@@ -14,7 +14,7 @@ namespace BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber
     public class CreateBarberCommand : RequestTemplate, IMapWith<Domain.Barber>
     {
         public string Name { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
 
         public void Mapping(Profile profile)
         {

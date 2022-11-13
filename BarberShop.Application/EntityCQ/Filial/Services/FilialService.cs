@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using BarberShop.Application.Common.Components;
+using BarberShop.Application.EntityCQ.Filial.Commands;
 using BarberShop.Application.EntityCQ.Filial.Interfaces;
 using BarberShop.Application.Models.Vm.Filial;
 using BarberShop.Persistence;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,10 +18,35 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
     {
         private readonly BarberShopDbContext _dbContext;
         private readonly IMapper _mapper;
-        public FilialService(BarberShopDbContext dbContext, IMapper mapper)
+        readonly IHttpContextAccessor httpContextAccessor;
+        public FilialService(IHttpContextAccessor httpContextAccessor,BarberShopDbContext dbContext, IMapper mapper)
         {
             this._dbContext = dbContext;
+            this.httpContextAccessor = httpContextAccessor;
             this._mapper = mapper;
+        }
+
+        public async Task<int> Create(CreateFilialCommand dto)
+        {
+            Domain.Filial filial = _mapper.Map<Domain.Filial>(dto);
+            Domain.Photo photo = new Domain.Photo();
+            if (dto.Image != null)
+            {
+                photo = new()
+                {
+                    Name = dto.Image.FileName,
+                    Path = dto.Image.SaveFileToFolderAndGetPath(),
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedIp = "::1"
+                };
+            }
+
+            filial.Photo = photo;
+
+            await _dbContext.Filials.AddAsync(filial, CancellationToken.None);
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return filial.Id;
         }
 
         public async Task<FilialDetailsVm> Get(int Id)
@@ -26,6 +54,9 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
             var filial = await _dbContext.Filials.Where(e => e.IsActive && e.Id == Id).FirstOrDefaultAsync();
 
             var vm = _mapper.Map<FilialDetailsVm>(filial);
+
+            if (vm.PhotoId != null)
+                vm.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)vm.PhotoId);
 
             return vm;
         }
@@ -35,6 +66,13 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
             var filials = await _dbContext.Filials.Where(e => e.IsActive).ToListAsync();
 
             var vm = _mapper.Map<List<FilialListDto>>(filials);
+
+            foreach (var filial in vm)
+            {
+                if (filial.PhotoId != null)
+                    filial.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)filial.PhotoId);
+
+            }
 
             return vm;
         }

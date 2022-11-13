@@ -14,7 +14,7 @@ namespace BarberShop.Application.Models.Dto.Barber
     public class CreateBarberDto : IMapWith<CreateBarberCommand>
     {
         public string Name { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
 
         public void Mapping(Profile profile)
         {
