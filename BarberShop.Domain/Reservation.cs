@@ -13,14 +13,14 @@ namespace BarberShop.Domain
 
         [ForeignKey("Service")]
         public int? FirstServiceId { get; set; }
-        [ForeignKey("Service")]
+        [ForeignKey("AdditionalService")]
         public int? SecondServiceId { get; set; }
         public int FilialId { get; set; }
         public int UserId { get; set; }
         public int ReservationStatusId { get; set; }
 
         public virtual Service FirstService { get; set; }
-        public virtual Service SecondService { get; set; }
+        public virtual AdditionalService SecondService { get; set; }
         public virtual Filial Filial { get; set; }
         public virtual User User { get; set; }
         public virtual ReservationStatus ReservationStatus { get; set; }
