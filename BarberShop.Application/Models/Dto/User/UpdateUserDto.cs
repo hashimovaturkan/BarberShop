@@ -17,7 +17,7 @@ namespace BarberShop.Application.Models.Dto.User
         public string Phone { get; set; }
         public int FilialId { get; set; }
         public string Email { get; set; }
-        public IFormFile? Image { get; set; }
+        public string? Image { get; set; }
 
         public void Mapping(Profile profile)
         {
