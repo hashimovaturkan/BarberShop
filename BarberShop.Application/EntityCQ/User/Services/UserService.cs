@@ -232,7 +232,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
         public async Task<UserDetailsVm> Get(int userId)
         {
-            var user = await _dbContext.Users.Include(e => e.Filial).FirstOrDefaultAsync(e => e.Id == userId && e.IsActive);
+            var user = await _dbContext.Users.Include(e => e.Filial).Include(e => e.Balance).FirstOrDefaultAsync(e => e.Id == userId && e.IsActive);
             if (user == null)
                 throw new NotFoundException(nameof(User), userId);
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CgBU5J3jnvVTYVCYuVanVwb8i07svuR1p4gMpehn06c=",
+  "Hash": "XRM+OYGo2otnihZidcIAIfVAXk8U+vqN5f9TxxFEzW4=",
   "Source": "BarberShop.WebApi",
   "BasePath": "_content/BarberShop.WebApi",
   "Mode": "Default",
@@ -10,17 +10,34 @@
     {
       "Name": "BarberShop.WebApi\\wwwroot",
       "Source": "BarberShop.WebApi",
-      "ContentRoot": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
       "BasePath": "_content/BarberShop.WebApi",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\uploads\\qrcode4.png",
+      "Identity": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\uploads\\qrcode1.png",
       "SourceId": "BarberShop.WebApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
+      "BasePath": "_content/BarberShop.WebApi",
+      "RelativePath": "uploads/qrcode1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\qrcode1.png"
+    },
+    {
+      "Identity": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\uploads\\qrcode4.png",
+      "SourceId": "BarberShop.WebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
       "BasePath": "_content/BarberShop.WebApi",
       "RelativePath": "uploads/qrcode4.png",
       "AssetKind": "All",
@@ -34,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\qrcode4.png"
     },
     {
-      "Identity": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\uploads\\qrcode5.png",
+      "Identity": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\uploads\\qrcode5.png",
       "SourceId": "BarberShop.WebApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Lesson\\Projects\\BarberShop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\turkan.hashimova\\Desktop\\BarberShop\\BarberShop.WebApi\\wwwroot\\",
       "BasePath": "_content/BarberShop.WebApi",
       "RelativePath": "uploads/qrcode5.png",
       "AssetKind": "All",

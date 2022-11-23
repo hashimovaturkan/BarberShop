@@ -56,6 +56,54 @@ namespace BarberShop.Persistence.Migrations
                     b.ToTable("AdditionalServices");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.Balance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Refund")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("UserBalance")
+                        .HasColumnType("float");
+
+                    b.Property<int>("UserBonuses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Balance");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.Barber", b =>
                 {
                     b.Property<int>("Id")
@@ -835,6 +883,17 @@ namespace BarberShop.Persistence.Migrations
                     b.ToTable("UserTokenTypes");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.Balance", b =>
+                {
+                    b.HasOne("BarberShop.Domain.User", "User")
+                        .WithOne("Balance")
+                        .HasForeignKey("BarberShop.Domain.Balance", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.Barber", b =>
                 {
                     b.HasOne("BarberShop.Domain.Photo", "Photo")
@@ -1040,6 +1099,9 @@ namespace BarberShop.Persistence.Migrations
 
             modelBuilder.Entity("BarberShop.Domain.User", b =>
                 {
+                    b.Navigation("Balance")
+                        .IsRequired();
+
                     b.Navigation("ErrorLogs");
 
                     b.Navigation("Orders");

@@ -45,6 +45,7 @@ namespace BarberShop.Domain
         public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
         public virtual UserStatus UserStatus { get; set; }
         public virtual Filial Filial { get; set; }
+        public virtual Balance Balance { get; set; }
         public virtual Photo Photo { get; set; }
         public virtual Photo QrCode { get; set; }
         public virtual ICollection<UserRoleRelation> UserRoleRelations { get; set; }

@@ -5,8 +5,11 @@ using BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber;
 using BarberShop.Application.EntityCQ.Filial.Interfaces;
 using BarberShop.Application.EntityCQ.Reservation.Commands;
 using BarberShop.Application.EntityCQ.Reservation.Interfaces;
+using BarberShop.Application.EntityCQ.Reservation.Queries;
 using BarberShop.Application.Models.Dto.Barber;
 using BarberShop.Application.Models.Dto.Reservation;
+using BarberShop.Application.Models.Template;
+using BarberShop.Application.Models.Vm.Reservation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop.WebApi.Controllers
@@ -38,6 +41,18 @@ namespace BarberShop.WebApi.Controllers
             var id = await _reservationService.Create(command);
 
             return Ok(id);
+        }
+
+        [HttpPost("ReservationList")]
+        public async Task<ActionResult<ResponseListTemplate<List<ReservationListDto>>>> Get(GetReservationListQuery query)
+        {
+            if (query.Number == 0)
+                query.Number = 1;
+            if (query.Size == 0)
+                query.Size = 20;
+
+            var vm = await _reservationService.GetList(query,UserId, Request.Path.Value);
+            return Ok(vm);
         }
     }
 }

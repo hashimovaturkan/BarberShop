@@ -17,6 +17,8 @@ namespace IntraNet.Application.Models.Vm.User
         public string FullName { get; set; }
         public string? ImageUrl { get; set; }
         public string? QrCodeUrl { get; set; }
+        public int UserBonuses { get; set; }
+        public double UserBalance { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -24,9 +26,13 @@ namespace IntraNet.Application.Models.Vm.User
                 .ForMember(userLoginVm => userLoginVm.Id,
                     opt => opt.MapFrom(user => user.Id))
                 .ForMember(userLoginVm => userLoginVm.FilialName,
-                    opt => opt.MapFrom(user => user.Filial.Name));
-                //.ForMember(userLoginVm => userLoginVm.ImageUrl,
-                //    opt => opt.MapFrom(user => user.ImageUrl.GetFile(_environment)));
+                    opt => opt.MapFrom(user => user.Filial.Name))
+                .ForMember(userLoginVm => userLoginVm.UserBalance,
+                    opt => opt.MapFrom(user => user.Balance.UserBalance))
+                .ForMember(userLoginVm => userLoginVm.UserBonuses,
+                    opt => opt.MapFrom(user => user.Balance.UserBonuses));
+            //.ForMember(userLoginVm => userLoginVm.ImageUrl,
+            //    opt => opt.MapFrom(user => user.ImageUrl.GetFile(_environment)));
         }
     }
 }

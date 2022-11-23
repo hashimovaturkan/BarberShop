@@ -177,5 +177,6 @@ namespace BarberShop.WebApi.Controllers
             return Ok(user);
         }
 
+
     }
 }
