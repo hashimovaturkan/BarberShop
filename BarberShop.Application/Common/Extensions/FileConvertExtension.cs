@@ -20,7 +20,10 @@ namespace BarberShop.Application.Common.Extensions
 
             using (var stream = new MemoryStream(bytes))
             {
-                return new FormFile(stream, 0, stream.Length, link, link);
+                stream.Position = 0;
+                var formFile = new FormFile(stream, 0, stream.Length, link, link);
+                if (stream != null) stream.Dispose();
+                return formFile;
             }
 
         }

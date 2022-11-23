@@ -156,7 +156,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromForm] UpdateUserDto updateUserDto)
+        public async Task<IActionResult> Update([FromBody] UpdateUserDto updateUserDto)
         {
             var command = _mapper.Map<UpdateUserCommand>(updateUserDto);
             command.UserId = UserId;
