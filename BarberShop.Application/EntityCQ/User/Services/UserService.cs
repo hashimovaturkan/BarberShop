@@ -256,12 +256,15 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             user.UpdatedDate = DateTime.UtcNow.AddHours(4);
 
             BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+
             if (userDto.Image != null)
             {
+                var image = userDto.Image.ConvertFile();
+
                 photo = new()
                 {
-                    Name = userDto.Image.FileName,
-                    Path = userDto.Image.SaveFileToFolderAndGetPath(),
+                    Name = image.FileName,
+                    Path = image.SaveFileToFolderAndGetPath(),
                     CreatedDate = DateTime.UtcNow,
                     CreatedIp = "::1"
                 };

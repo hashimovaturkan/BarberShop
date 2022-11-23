@@ -13,10 +13,14 @@ namespace BarberShop.Application.Common.Extensions
         public static IFormFile ConvertFile(this string file)
         {
             Byte[] bytes = Convert.FromBase64String(file);
+            Random random = new Random();
+            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            var link  = new string(Enumerable.Repeat(chars, 13)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
 
             using (var stream = new MemoryStream(bytes))
             {
-                return new FormFile(stream, 0, stream.Length, "a", "a");
+                return new FormFile(stream, 0, stream.Length, link, link);
             }
 
         }
