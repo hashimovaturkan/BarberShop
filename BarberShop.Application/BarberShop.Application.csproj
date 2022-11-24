@@ -32,4 +32,9 @@
     <ProjectReference Include="..\BarberShop.Persistence\BarberShop.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityCQ\Gift\Commands\" />
+    <Folder Include="EntityCQ\Gift\Queries\" />
+  </ItemGroup>
+
 </Project>
