@@ -255,21 +255,21 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             _mapper.Map(userDto, user);
             user.UpdatedDate = DateTime.UtcNow.AddHours(4);
 
-            BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+            //BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
 
-            if (userDto.Image != null)
-            {
-                var image = userDto.Image.ConvertFile();
+            //if (userDto.Image != null)
+            //{
+            //    var image = userDto.Image.ConvertFile();
 
-                photo = new()
-                {
-                    Name = image.FileName,
-                    Path = image.SaveFileToFolderAndGetPath(),
-                    CreatedDate = DateTime.UtcNow,
-                    CreatedIp = "::1"
-                };
-            }
-            user.Photo = photo;
+            //    photo = new()
+            //    {
+            //        Name = image.FileName,
+            //        Path = image.SaveFileToFolderAndGetPath(),
+            //        CreatedDate = DateTime.UtcNow,
+            //        CreatedIp = "::1"
+            //    };
+            //}
+            //user.Photo = photo;
 
             await _dbContext.SaveChangesAsync(CancellationToken.None);
 
