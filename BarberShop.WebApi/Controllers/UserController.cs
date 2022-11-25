@@ -136,10 +136,10 @@ namespace BarberShop.WebApi.Controllers
         [HttpPost("/api/UserList")]
         public async Task<ActionResult<UserLookUpDto>> GetAll([FromBody] GetUserListDto request)
         {
-            if (request.Number == 0)
-                request.Number = 1;
-            if (request.Size == 0)
-                request.Size = 20;
+            if (request.PageNumber == 0)
+                request.PageNumber = 1;
+            if (request.PageSize == 0)
+                request.PageSize = 20;
 
             var query = _mapper.Map<GetUserListQuery>(request);
             var vm = await _userService.GetList(query);

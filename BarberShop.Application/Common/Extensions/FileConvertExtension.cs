@@ -1,4 +1,5 @@
-﻿using BarberShop.Persistence.Migrations;
+﻿using BarberShop.Application.Models.Vm.File;
+using BarberShop.Persistence.Migrations;
 using Microsoft.AspNetCore.Http;
 using RestSharp;
 using System;
@@ -11,40 +12,37 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static BarberShop.Application.Common.Components.FileHelperExtension;
 
 namespace BarberShop.Application.Common.Extensions
 {
     public static partial class Extension
     {
-        public static IFormFile ConvertFile(this string file)
+        private const string _tempFolder = "uploads";
+        private static readonly string _filePath = Path.Combine(Directory.GetCurrentDirectory(), _tempFolder);
+        public static ConvertedFile ConvertFile(this string base64)
         {
-            Byte[] bytes = Convert.FromBase64String(file);
-            Random random = new Random();
-            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-            var link  = new string(Enumerable.Repeat(chars, 13)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
+            byte[] bytes = Convert.FromBase64String(base64);
 
-            FormFile formFile;
-            using (var stream = new MemoryStream(bytes))
+            var url = bytes.SaveFileToFolderAndGetPath();
+
+            var photofullPath = Path.Combine(_filePath, url);
+
+            IFormFile fromFile;
+            using (var ms = new MemoryStream(bytes))
             {
-                stream.Position = 0;
-                formFile = new FormFile(stream, 0, stream.Length, link, link)
-                {
-                    Headers = new HeaderDictionary(),
-                    //ContentType = "multipart/form-data",
-                };
-
-                System.Net.Mime.ContentDisposition cd = new System.Net.Mime.ContentDisposition
-                {
-                    FileName = formFile.FileName
-                };
-                formFile.ContentDisposition = cd.ToString();
-
-                //if (stream != null) stream.Dispose();
+                fromFile = new FormFile(ms, 0, ms.Length,
+                    Path.GetFileNameWithoutExtension(photofullPath),
+                    Path.GetFileName(photofullPath)
+                );
                 
             }
 
-            return formFile;
+            return new ConvertedFile
+            {
+                File = fromFile,
+                Path = photofullPath
+            };
 
 
         }

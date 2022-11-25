@@ -51,7 +51,7 @@ namespace BarberShop.Application.EntityCQ.Reservation.Services
                 .Include(e => e.FirstService)
                 .Where(e => e.IsActive && e.UserId == id);
 
-            PaginationFilter paginationFilter = new PaginationFilter(query.Number, query.Size);
+            PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
             IQueryable<Domain.Reservation> surveyPagedQuery = paginationFilter.GetPagedList(reservations);
 
             int totalRecords = await reservations.CountAsync();

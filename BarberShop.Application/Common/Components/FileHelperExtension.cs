@@ -30,6 +30,24 @@ namespace BarberShop.Application.Common.Components
 
             return SaveFileAndGetPath(file, directory);
         }
+
+        public static string SaveFileToFolderAndGetPath(this byte[] file, FileType fileType = FileType.Photo)
+        {
+            string directory = fileType switch
+            {
+                FileType.Photo => Path.Combine(Directory.GetCurrentDirectory(), _tempFolder, _folderPhoto),
+                FileType.Video => Path.Combine(Directory.GetCurrentDirectory(), _tempFolder, _tempFolderVideo),
+                FileType.Resume => Path.Combine(Directory.GetCurrentDirectory(), _tempFolder, _tempFolderResume),
+                FileType.File => Path.Combine(Directory.GetCurrentDirectory(), _tempFolder, _tempFolderFile),
+                _ => throw new NotSupportedException()
+            };
+
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
+            return SaveFileAndGetPath(file, directory);
+        }
+
         public static bool IsPhoto(this IFormFile file) => file.ContentType != null && (file.ContentType == "image/jpeg" || file.ContentType == "image/jpg" || file.ContentType == "image/png" || file.ContentType == "image/gif");
         private static string SaveFileAndGetPath(IFormFile file, string directory)
         {
@@ -46,6 +64,21 @@ namespace BarberShop.Application.Common.Components
             }
             return filePath;
         }
+
+        private static string SaveFileAndGetPath(byte[] file, string directory)
+        {
+            string filePath = string.Empty;
+            if (file != null)
+            {
+                string uniqueFileName = Guid.NewGuid().ToString();
+
+                filePath = Path.Combine(directory, uniqueFileName);
+
+                File.WriteAllBytes(filePath, file);
+            }
+            return filePath;
+        }
+
         public enum FileType : byte
         {
             Photo = 10,

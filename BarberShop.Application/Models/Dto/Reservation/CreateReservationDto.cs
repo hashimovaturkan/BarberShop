@@ -13,7 +13,7 @@ namespace BarberShop.Application.Models.Dto.Reservation
 {
     public class CreateReservationDto : IMapWith<CreateReservationCommand>
     {
-        public DateTime ReservationDate { get; set; }
+        public string ReservationDate { get; set; }
         public int? FirstServiceId { get; set; }
         public int? SecondServiceId { get; set; }
 

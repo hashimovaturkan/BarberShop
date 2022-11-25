@@ -2,7 +2,7 @@
 {
     public class RequestListTemplate
     {
-        public int Size { get; set; } = 20;
-        public int Number { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public int PageNumber { get; set; } = 1;
     }
 }

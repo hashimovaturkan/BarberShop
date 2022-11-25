@@ -69,7 +69,7 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
             var barbers = _dbContext.Barbers.Include(e => e.Photo).Where(e => e.IsActive);
 
 
-            PaginationFilter paginationFilter = new PaginationFilter(query.Number, query.Size);
+            PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
             IQueryable<Domain.Barber> surveyPagedQuery = paginationFilter.GetPagedList(barbers);
 
             int totalRecords = await barbers.CountAsync();

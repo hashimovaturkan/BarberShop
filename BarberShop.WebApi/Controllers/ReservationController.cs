@@ -46,10 +46,10 @@ namespace BarberShop.WebApi.Controllers
         [HttpPost("ReservationList")]
         public async Task<ActionResult<ResponseListTemplate<List<ReservationListDto>>>> Get(GetReservationListQuery query)
         {
-            if (query.Number == 0)
-                query.Number = 1;
-            if (query.Size == 0)
-                query.Size = 20;
+            if (query.PageNumber == 0)
+                query.PageNumber = 1;
+            if (query.PageSize == 0)
+                query.PageSize = 20;
 
             var vm = await _reservationService.GetList(query,UserId, Request.Path.Value);
             return Ok(vm);
