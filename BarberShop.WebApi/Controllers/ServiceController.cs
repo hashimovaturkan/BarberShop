@@ -41,7 +41,7 @@ namespace BarberShop.WebApi.Controllers
             if (query.Number == 0)
                 query.Number = 1;
             if (query.Size == 0)
-                query.Size = 20;
+                query.Size = 10;
 
             query.UserId = UserId;
             query.UserIp = UserIp;

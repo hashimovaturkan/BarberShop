@@ -49,7 +49,7 @@ namespace BarberShop.WebApi.Controllers
             if (query.PageNumber == 0)
                 query.PageNumber = 1;
             if (query.PageSize == 0)
-                query.PageSize = 20;
+                query.PageSize = 10;
 
             var vm = await _reservationService.GetList(query,UserId, Request.Path.Value);
             return Ok(vm);

@@ -29,7 +29,6 @@ namespace BarberShop.WebApi.Controllers
             _userRoleService = userRoleService;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<GiftListDto>>> Get()
         {

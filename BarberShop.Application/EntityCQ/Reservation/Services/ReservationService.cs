@@ -33,6 +33,9 @@ namespace BarberShop.Application.EntityCQ.Reservation.Services
         {
             Domain.Reservation reservation = _mapper.Map<Domain.Reservation>(dto);
 
+            if (reservation.SecondServiceId == 0)
+                reservation.SecondServiceId = null;
+
             reservation.ReservationStatusId = 1;
             reservation.FilialId =(int) _dbContext.Users.FirstOrDefaultAsync(e => e.Id == dto.UserId).Result.FilialId;
 
