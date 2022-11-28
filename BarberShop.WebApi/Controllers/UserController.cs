@@ -164,7 +164,7 @@ namespace BarberShop.WebApi.Controllers
             await _userService.Update(command);
 
 
-            return NoContent();
+            return Ok();
 
 
         }
