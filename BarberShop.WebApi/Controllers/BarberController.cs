@@ -45,7 +45,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult<int>> Create([FromForm] CreateBarberDto createBarberDto)
+        public async Task<ActionResult<int>> Create([FromBody] CreateBarberDto createBarberDto)
         {
             var command = _mapper.Map<CreateBarberCommand>(createBarberDto);
             SetUserInfo();

@@ -38,16 +38,13 @@ namespace BarberShop.WebApi.Controllers
         {
             var query = _mapper.Map<GetServiceListQuery>(dto);
 
-            if (query.Number == 0)
-                query.Number = 1;
-            if (query.Size == 0)
-                query.Size = 10;
+            if (query.PageNumber == 0)
+                query.PageNumber = 1;
+            if (query.PageSize == 0)
+                query.PageSize = 10;
 
-            query.UserId = UserId;
-            query.UserIp = UserIp;
-            query.Route = Request.Path.Value;
 
-            var vm = await _serviceService.GetList(query);
+            var vm = await _serviceService.GetList(query, Request.Path.Value);
             return Ok(vm);
         }
 

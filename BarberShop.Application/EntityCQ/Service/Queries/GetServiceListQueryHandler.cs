@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BarberShop.Application.EntityCQ.Service.Queries
 {
-    public class GetServiceListQuery : RequestListQueryTemplate
+    public class GetServiceListQuery : RequestListTemplate
     {
     }
 }

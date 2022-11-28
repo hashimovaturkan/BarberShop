@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Components;
+using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.EntityCQ.Filial.Commands;
 using BarberShop.Application.EntityCQ.Filial.Interfaces;
 using BarberShop.Application.Models.Vm.Filial;
@@ -29,18 +30,19 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
         public async Task<int> Create(CreateFilialCommand dto)
         {
             Domain.Filial filial = _mapper.Map<Domain.Filial>(dto);
-            Domain.Photo photo = new Domain.Photo();
+            BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+            var image = dto.Image.ConvertFile();
+
             if (dto.Image != null)
             {
                 photo = new()
                 {
-                    Name = dto.Image.FileName,
-                    Path = dto.Image.SaveFileToFolderAndGetPath(),
+                    Name = image.File.FileName,
+                    Path = image.Path,
                     CreatedDate = DateTime.UtcNow,
                     CreatedIp = "::1"
                 };
             }
-
             filial.Photo = photo;
 
             await _dbContext.Filials.AddAsync(filial, CancellationToken.None);

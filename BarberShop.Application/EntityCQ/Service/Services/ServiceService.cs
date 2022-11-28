@@ -38,18 +38,18 @@ namespace BarberShop.Application.EntityCQ.Service.Services
             return vm;
         }
 
-        public async Task<ResponseListTemplate<List<ServiceLookupDto>>> GetList(GetServiceListQuery query)
+        public async Task<ResponseListTemplate<List<ServiceLookupDto>>> GetList(GetServiceListQuery query, string route)
         {
             var serviceQuery = _dbContext.Services.Where(e => e.IsActive);
 
-            PaginationFilter paginationFilter = new PaginationFilter(query.Number, query.Size);
+            PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
             IQueryable<Domain.Service> servicePagedQuery = paginationFilter.GetPagedList(serviceQuery);
 
             int totalRecords = await serviceQuery.CountAsync();
 
             var serviceLookupDtoList = _mapper.Map<List<ServiceLookupDto>>(servicePagedQuery);
 
-            ResponseListTemplate<List<ServiceLookupDto>> result = serviceLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, query.Route);
+            ResponseListTemplate<List<ServiceLookupDto>> result = serviceLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, route);
 
             return result;
         }

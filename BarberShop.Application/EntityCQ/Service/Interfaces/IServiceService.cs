@@ -11,7 +11,7 @@ namespace BarberShop.Application.EntityCQ.Service.Interfaces
 {
     public interface IServiceService : IBaseService
     {
-        Task<ResponseListTemplate<List<ServiceLookupDto>>> GetList(GetServiceListQuery query);
+        Task<ResponseListTemplate<List<ServiceLookupDto>>> GetList(GetServiceListQuery query, string route);
         Task<List<ServiceLookupDto>> Get();
     }
 }
