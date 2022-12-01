@@ -9,6 +9,7 @@ using MediatR;
 using IntraNet.Application.Models.Vm.User;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
+using BarberShop.Application.Models.Dto.Mail;
 
 namespace BarberShop.Application.EntitiesCQ.User.Interfaces
 {
@@ -20,6 +21,7 @@ namespace BarberShop.Application.EntitiesCQ.User.Interfaces
         Task<int> ResetPassword(string phoneNumber, string password);
         Task<int> CreateAsync(CreateUserCommand createUserDto);
         Task<bool> SendSms(string phoneNumber);
+        Task<bool> SendMail(SendMailDto mailDto, int userId);
 
         Task<UserLookUpDto> GetList(GetUserListQuery query);
         Task<UserDetailsVm> Get(int userId);

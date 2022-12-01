@@ -14,6 +14,7 @@ namespace BarberShop.Domain
             UserTokens = new HashSet<UserToken>();
             Reservations = new HashSet<Reservation>();
             Orders = new HashSet<Order>();
+            UserGiftRelations = new HashSet<UserGiftRelation>();
         }
 
 
@@ -52,5 +53,6 @@ namespace BarberShop.Domain
         public virtual ICollection<UserToken> UserTokens { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<UserGiftRelation> UserGiftRelations { get; set; }
     }
 }

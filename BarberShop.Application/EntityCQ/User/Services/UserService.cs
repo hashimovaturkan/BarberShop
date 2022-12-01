@@ -8,6 +8,7 @@ using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
+using BarberShop.Application.Models.Dto.Mail;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.User;
 using BarberShop.Application.Repos;
@@ -15,12 +16,16 @@ using BarberShop.Domain;
 using BarberShop.Persistence;
 using BarberShop.Persistence.Migrations;
 using IntraNet.Application.Models.Vm.User;
+using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoreLinq;
+using System;
+using System.IO;
 using System.Web;
+using Balance = BarberShop.Domain.Balance;
 using Photo = BarberShop.Domain.Photo;
 
 namespace IntraNet.Application.EntitiesCQ.User.Services
@@ -150,7 +155,9 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     FilialId = request.FilialId,
                     UserStatusId = 1,
                     IsActive = true,
-                    CreatedIp = request.UserIp
+                    CreatedIp = request.UserIp,
+                    Balance = new Balance() { CreatedIp = request.UserIp }
+
 
                 };
 
@@ -309,6 +316,22 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             };
 
             return lookUpDto;
+        }
+
+        public async Task<bool> SendMail(SendMailDto mailDto, int userId)
+        {
+            if (mailDto.Text == null)
+                return false;
+
+            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Id == userId);
+
+            MailService mailService = new MailService(user.Email, _configuration);
+            string mailBody = mailDto.Text;
+            string mailSubject = user.FullName;
+            var isSuccess = await mailService.SendMail(mailBody, mailSubject, CancellationToken.None);
+
+            return isSuccess;
+
         }
     }
 }

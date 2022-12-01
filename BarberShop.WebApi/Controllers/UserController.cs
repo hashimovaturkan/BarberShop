@@ -7,6 +7,7 @@ using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
 using BarberShop.Application.Enums;
+using BarberShop.Application.Models.Dto.Mail;
 using BarberShop.Application.Models.Dto.User;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.User;
@@ -175,6 +176,17 @@ namespace BarberShop.WebApi.Controllers
             var user = await _userService.Get(dto.Id);
 
             return Ok(user);
+        }
+
+        [HttpPost("/api/SendMail")]
+        public async Task<ActionResult<UserDetailsVm>> SendMail([FromBody] SendMailDto dto)
+        {
+            var isSucces = await _userService.SendMail(dto, UserId);
+
+            if (isSucces)
+                return Ok();
+            else
+                return BadRequest();
         }
 
 
