@@ -101,7 +101,7 @@ namespace BarberShop.Persistence.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Balance");
+                    b.ToTable("Balances");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.Barber", b =>
@@ -360,7 +360,7 @@ namespace BarberShop.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.Photo", b =>
@@ -660,6 +660,49 @@ namespace BarberShop.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserClaimTypes");
+                });
+
+            modelBuilder.Entity("BarberShop.Domain.UserGiftRelation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedIp")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GiftId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GiftId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserGiftRelations");
                 });
 
             modelBuilder.Entity("BarberShop.Domain.UserLog", b =>
@@ -1064,6 +1107,25 @@ namespace BarberShop.Persistence.Migrations
                     b.Navigation("UserClaimType");
                 });
 
+            modelBuilder.Entity("BarberShop.Domain.UserGiftRelation", b =>
+                {
+                    b.HasOne("BarberShop.Domain.Gift", "Gift")
+                        .WithMany()
+                        .HasForeignKey("GiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BarberShop.Domain.User", "User")
+                        .WithMany("UserGiftRelations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gift");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BarberShop.Domain.UserRoleClaim", b =>
                 {
                     b.HasOne("BarberShop.Domain.UserClaim", "UserClaim")
@@ -1144,6 +1206,8 @@ namespace BarberShop.Persistence.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Reservations");
+
+                    b.Navigation("UserGiftRelations");
 
                     b.Navigation("UserRoleRelations");
 

@@ -32,6 +32,10 @@ namespace BarberShop.Persistence
         public virtual DbSet<ReservationStatus> ReservationStatuses { get; set; }
         public virtual DbSet<AdditionalService> AdditionalServices { get; set; }
         public virtual DbSet<Gift> Gifts { get; set; }
+        public virtual DbSet<UserGiftRelation> UserGiftRelations { get; set; }
+        public virtual DbSet<Balance> Balances { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+
 
         public BarberShopDbContext(DbContextOptions<BarberShopDbContext> options)
             : base(options) { }

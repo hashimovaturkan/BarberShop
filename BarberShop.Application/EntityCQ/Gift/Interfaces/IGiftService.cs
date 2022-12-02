@@ -1,4 +1,5 @@
-﻿using BarberShop.Application.Models.Dto.Gift;
+﻿using BarberShop.Application.EntityCQ.Gift.Commands.GiftOrder;
+using BarberShop.Application.Models.Dto.Gift;
 using BarberShop.Application.Models.Vm.Filial;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,7 @@ namespace BarberShop.Application.EntityCQ.Gift.Interfaces
     public interface IGiftService : IBaseService
     {
         Task<List<GiftListDto>> GetList();
+        Task<bool> OrderGift(OrderGiftCommand command);
+        Task<List<OrderGiftListVm>> GetOrderGiftList(int userId);
     }
 }

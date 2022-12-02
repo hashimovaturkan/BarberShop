@@ -32,6 +32,21 @@ namespace BarberShop.Application.Repos
             return user;
         }
 
+        public async Task<Domain.User> GetUserByIdAsync(int userId)
+        {
+            Domain.User? user = await AsQueryable().AsNoTracking()
+                .Include(e => e.UserTokens)
+                .Include(e => e.Balance)
+                .Include(e => e.Orders)
+                .Include(e => e.UserGiftRelations)
+                .ThenInclude(e => e.Gift)
+                .Include(e => e.Filial)
+                .Where(e => e.Id == userId && e.IsActive)
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
+
         public IQueryable<Domain.User> GetListQuery()
         {
             IQueryable<Domain.User> result = AsQueryable().AsNoTracking()
