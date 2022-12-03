@@ -30,11 +30,13 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
         public async Task<int> Create(CreateFilialCommand dto)
         {
             Domain.Filial filial = _mapper.Map<Domain.Filial>(dto);
-            BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
-            var image = dto.Image.ConvertFile();
-
             if (dto.Image != null)
             {
+                BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+                var image = dto.Image.ConvertFile();
+
+
+
                 photo = new()
                 {
                     Name = image.File.FileName,
@@ -42,9 +44,10 @@ namespace BarberShop.Application.EntityCQ.Filial.Services
                     CreatedDate = DateTime.UtcNow,
                     CreatedIp = "::1"
                 };
-            }
-            filial.Photo = photo;
 
+                filial.Photo = photo;
+            }
+                
             await _dbContext.Filials.AddAsync(filial, CancellationToken.None);
             await _dbContext.SaveChangesAsync(CancellationToken.None);
 

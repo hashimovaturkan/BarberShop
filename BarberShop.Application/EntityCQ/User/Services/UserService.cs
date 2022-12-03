@@ -259,14 +259,17 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             if (user == null)
                 throw new NotFoundException(nameof(User), userDto.Id);
 
+            var imageId = user.PhotoId;
+
             _mapper.Map(userDto, user);
             user.UpdatedDate = DateTime.UtcNow.AddHours(4);
-
-            BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
-            var image = userDto.Image.ConvertFile();
+            user.PhotoId = imageId;
 
             if (userDto.Image != null)
             {
+                BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+                var image = userDto.Image.ConvertFile();
+
                 photo = new()
                 {
                     Name = image.File.FileName,
@@ -274,9 +277,9 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     CreatedDate = DateTime.UtcNow,
                     CreatedIp = "::1"
                 };
+                user.Photo = photo;
             }
-            user.Photo = photo;
-
+                
             await _dbContext.SaveChangesAsync(CancellationToken.None);
 
             return user.Id;

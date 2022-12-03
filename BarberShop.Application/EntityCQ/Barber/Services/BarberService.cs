@@ -44,12 +44,13 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
         public async Task<int> Create(CreateBarberCommand dto)
         {
             Domain.Barber barber = _mapper.Map<Domain.Barber>(dto);
-            BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
-
-            var image = dto.Image.ConvertFile();
 
             if (dto.Image != null)
             {
+                BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+
+                var image = dto.Image.ConvertFile();
+
                 photo = new()
                 {
                     Name = image.File.FileName,
@@ -57,8 +58,10 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
                     CreatedDate = DateTime.UtcNow,
                     CreatedIp = "::1"
                 };
+
+                barber.Photo = photo;
             }
-            barber.Photo = photo;
+                
 
             await _dbContext.Barbers.AddAsync(barber, CancellationToken.None);
             await _dbContext.SaveChangesAsync(CancellationToken.None);
