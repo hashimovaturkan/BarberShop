@@ -30,7 +30,7 @@ namespace IntraNet.Application.Models.Vm.User
                 .ForMember(userLoginVm => userLoginVm.UserBalance,
                     opt => opt.MapFrom(user => user.Balance.UserBalance))
                 .ForMember(userLoginVm => userLoginVm.UserBonuses,
-                    opt => opt.MapFrom(user => user.Balance.UserBonuses));
+                    opt => opt.MapFrom(user => user.UserBonuses));
             //.ForMember(userLoginVm => userLoginVm.ImageUrl,
             //    opt => opt.MapFrom(user => user.ImageUrl.GetFile(_environment)));
         }

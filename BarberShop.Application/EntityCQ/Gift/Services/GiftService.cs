@@ -55,7 +55,6 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
         public async Task<bool> OrderGift(OrderGiftCommand command)
         {
             var user = await _userRepo.GetUserByIdAsync(command.UserId);
-            var balance = await _dbContext.Balances.FirstOrDefaultAsync(e => e.UserId == command.UserId);
             var gift = await _dbContext.Gifts.FirstOrDefaultAsync(e => e.Id == command.GiftId);
 
             if (user == null)
@@ -64,9 +63,9 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
             if (gift == null)
                 throw new BadRequestException("Gift not found");
 
-            if (user.Balance.UserBonuses >= gift.Price)
+            if (user.UserBonuses >= gift.Price)
             {
-                balance.UserBonuses = user.Balance.UserBonuses - (int)gift.Price; 
+                user.UserBonuses = user.UserBonuses - (int)gift.Price; 
 
                 var userGift = new UserGiftRelation() { UserId = command.UserId, CreatedIp = command.UserIp, GiftId = command.GiftId, Status = false };
 

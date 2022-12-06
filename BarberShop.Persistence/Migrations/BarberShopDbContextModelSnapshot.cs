@@ -90,9 +90,6 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<double>("UserBalance")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserBonuses")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -122,6 +119,9 @@ namespace BarberShop.Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -588,6 +588,9 @@ namespace BarberShop.Persistence.Migrations
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserBonuses")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserStatusId")
                         .HasColumnType("int");

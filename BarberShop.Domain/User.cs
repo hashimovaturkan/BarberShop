@@ -38,6 +38,7 @@ namespace BarberShop.Domain
         public string Password { get; set; }
 
         public Guid Salt { get; set; }
+        public int? UserBonuses { get; set; }
         public int? PhotoId { get; set; }
         public int? QrCodeId { get; set; }
         public int UserStatusId { get; set; }

@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
-using BarberShop.Application.EntityCQ.Filial.Commands;
-using BarberShop.Application.EntityCQ.Filial.Interfaces;
 using BarberShop.Application.EntityCQ.Gift.Commands.GiftOrder;
 using BarberShop.Application.EntityCQ.Gift.Interfaces;
-using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
-using BarberShop.Application.Models.Dto.Filial;
 using BarberShop.Application.Models.Dto.Gift;
-using BarberShop.Application.Models.Dto.User;
-using BarberShop.Application.Models.Vm.Filial;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop.WebApi.Controllers

@@ -10,7 +10,6 @@ namespace BarberShop.Domain
     {
         public int UserId { get; set; }
         public double UserBalance { get; set; }
-        public int UserBonuses { get; set; }
         public double Refund { get; set; }
         public string? PaymentMethod { get; set; }
 
