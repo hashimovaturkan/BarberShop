@@ -156,6 +156,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                     UserStatusId = 1,
                     IsActive = true,
                     CreatedIp = request.UserIp,
+                    UserBonuses = 0,
                     Balance = new Balance() { CreatedIp = request.UserIp }
 
 
@@ -267,7 +268,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             if (userDto.Image != null)
             {
-                BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+                Photo photo = new Photo();
                 var image = userDto.Image.ConvertFile();
 
                 photo = new()
