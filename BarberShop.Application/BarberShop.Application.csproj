@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <Folder Include="EntityCQ\Gift\Queries\" />
-    <Folder Include="Models\Vm\NewFolder\" />
   </ItemGroup>
 
 </Project>
