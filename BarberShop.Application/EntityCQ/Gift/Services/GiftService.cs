@@ -54,7 +54,8 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
 
         public async Task<bool> OrderGift(OrderGiftCommand command)
         {
-            var user = await _userRepo.GetUserByIdAsync(command.UserId);
+            //var user = await _userRepo.GetUserByIdAsync(command.UserId);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Id == command.UserId);
             var gift = await _dbContext.Gifts.FirstOrDefaultAsync(e => e.Id == command.GiftId);
 
             if (user == null)
@@ -65,7 +66,7 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
 
             if (user.UserBonuses >= gift.Price)
             {
-                user.UserBonuses = user.UserBonuses - (int)gift.Price; 
+                user.UserBonuses = user.UserBonuses - (int)gift.Price;
 
                 var userGift = new UserGiftRelation() { UserId = command.UserId, CreatedIp = command.UserIp, GiftId = command.GiftId, Status = false };
 
@@ -73,7 +74,7 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
 
                 await _dbContext.SaveChangesAsync(CancellationToken.None);
 
-                
+
             }
 
             return true;
