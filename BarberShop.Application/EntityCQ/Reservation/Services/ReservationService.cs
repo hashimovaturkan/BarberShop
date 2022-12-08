@@ -59,7 +59,7 @@ namespace BarberShop.Application.EntityCQ.Reservation.Services
 
             int totalRecords = await reservations.CountAsync();
 
-            List<Domain.Reservation> surveyPaged = await surveyPagedQuery.ToListAsync();
+            List<Domain.Reservation> surveyPaged = await surveyPagedQuery.OrderBy(e => e.CreatedDate).ToListAsync();
 
             var surveyLookupDtoList = _mapper.Map<List<ReservationListDto>>(surveyPaged);
             
