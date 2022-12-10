@@ -44,7 +44,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPost("ReservationList")]
-        public async Task<ActionResult<ResponseListTemplate<List<ReservationListDto>>>> Get(GetReservationListQuery query)
+        public async Task<ActionResult<ResponseListTemplate<List<ReservationListDto>>>> Get([FromQuery]GetReservationListQuery query)
         {
             if (query.PageNumber == 0)
                 query.PageNumber = 1;

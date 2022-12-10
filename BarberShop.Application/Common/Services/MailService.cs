@@ -23,7 +23,7 @@ namespace BarberShop.Application.Common.Services
             Configuration = configuration;
 
             //_receiverMailAddress = new MailAddress(string.IsNullOrWhiteSpace(receiver) ? "test1@burncode.az" : receiver);
-            _receiverMailAddress = new MailAddress("test1@burncode.az");
+            _receiverMailAddress = new MailAddress("app@legacybarber.pl");
 
         }
 
@@ -49,7 +49,7 @@ namespace BarberShop.Application.Common.Services
                     using (SmtpClient smtpClient = new SmtpClient(Configuration["MailConfig:senderSmtp"], int.Parse(Configuration["MailConfig:port"])))
                     {
                         smtpClient.Credentials = new NetworkCredential(_senderMail, _senderMailPass);
-                        //smtpClient.EnableSsl = true;
+                        smtpClient.EnableSsl = true;
                         smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                         smtpClient.Send(mailMessage);
                     }
