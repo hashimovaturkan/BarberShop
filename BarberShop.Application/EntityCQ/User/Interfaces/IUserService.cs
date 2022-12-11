@@ -23,7 +23,7 @@ namespace BarberShop.Application.EntitiesCQ.User.Interfaces
         Task<bool> SendSms(string phoneNumber);
         Task<bool> SendMail(SendMailDto mailDto, int userId);
 
-        Task<UserLookUpDto> GetList(GetUserListQuery query);
+        Task<ResponseListTemplate<List<UserListVm>>> GetList(GetUserListQuery query);
         Task<UserDetailsVm> Get(int userId);
         Task<int> Update(UpdateUserCommand userDto);
     }

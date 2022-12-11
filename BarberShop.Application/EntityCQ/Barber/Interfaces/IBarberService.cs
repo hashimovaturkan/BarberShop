@@ -14,6 +14,7 @@ namespace BarberShop.Application.EntityCQ.Barber.Interfaces
 {
     public interface IBarberService : IBaseService
     {
+        Task<ResponseListTemplate<List<BarberListDto>>> GetSearchList(GetBarberListQuery query, string? searchWord, string route);
         Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route);
         Task<int> Create(CreateBarberCommand dto);
         Task<int> Update(UpdateBarberCommand dto);

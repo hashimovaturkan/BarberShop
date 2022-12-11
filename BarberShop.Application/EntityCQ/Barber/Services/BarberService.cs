@@ -72,10 +72,35 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
             return barber.Id;
         }
 
-        public async Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route)
+        public async Task<ResponseListTemplate<List<BarberListDto>>> GetSearchList(GetBarberListQuery query,string? searchWord, string route)
         {
             var barbers = _dbContext.Barbers.Include(e => e.Photo).Where(e => e.IsActive);
 
+            if (searchWord != null || searchWord != "")
+                barbers = barbers.Where(e => e.Name.ToLower().Contains(searchWord.ToLower()));
+
+            PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
+            IQueryable<Domain.Barber> surveyPagedQuery = paginationFilter.GetPagedList(barbers);
+
+            int totalRecords = await barbers.CountAsync();
+            List<Domain.Barber> surveyPaged = await surveyPagedQuery.OrderByDescending(e => e.Priority).ToListAsync();
+
+            List<BarberListDto> surveyLookupDtoList = _mapper.Map<List<BarberListDto>>(surveyPaged);
+            foreach (var barber in surveyLookupDtoList)
+            {
+                if (barber.PhotoId != null)
+                    barber.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)barber.PhotoId);
+
+            }
+
+            ResponseListTemplate<List<BarberListDto>> result = surveyLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, route);
+
+            return result;
+        }
+
+        public async Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route)
+        {
+            var barbers = _dbContext.Barbers.Include(e => e.Photo).Where(e => e.IsActive);
 
             PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
             IQueryable<Domain.Barber> surveyPagedQuery = paginationFilter.GetPagedList(barbers);

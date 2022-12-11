@@ -13,6 +13,7 @@ using BarberShop.WebApi.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
+using BarberListDto = BarberShop.Application.Models.Dto.Barber.BarberListDto;
 
 namespace BarberShop.WebApi.Controllers
 {
@@ -42,6 +43,18 @@ namespace BarberShop.WebApi.Controllers
                 query.PageSize = 10;
 
             var vm = await _barberService.GetList(query, Request.Path.Value);
+            return Ok(vm);
+        }
+
+        [HttpPost("BarberSearchList")]
+        public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get([FromQuery] GetBarberListQuery query, [FromBody] BarberListDto? barberListDto)
+        {
+            if (query.PageNumber == 0)
+                query.PageNumber = 1;
+            if (query.PageSize == 0)
+                query.PageSize = 10;
+
+            var vm = await _barberService.GetSearchList(query, barberListDto.SearchingWord, Request.Path.Value);
             return Ok(vm);
         }
 

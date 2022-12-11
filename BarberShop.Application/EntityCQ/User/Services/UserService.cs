@@ -286,7 +286,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
             return user.Id;
         }
 
-        public async Task<UserLookUpDto> GetList(GetUserListQuery query)
+        public async Task<ResponseListTemplate<List<UserListVm>>> GetList(GetUserListQuery query)
         {
             var users = _dbContext.Users
                 .Include(e => e.Filial)
@@ -295,7 +295,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
                 .Where(e => e.IsActive && e.UserRoleRelations.Select(k => k.UserRole.Name).Contains("User"));
 
 
-            if (query.SearchingWord != null)
+            if (query.SearchingWord != null || query.SearchingWord != "" )
                 users = users.Where(e => e.FullName.ToLower().Contains(query.SearchingWord.ToLower()));
 
             PaginationFilter paginationFilter = new PaginationFilter(query.Number, query.Size);
@@ -313,13 +313,7 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             ResponseListTemplate<List<UserListVm>> result = userList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, query.Route);
 
-            var lookUpDto = new UserLookUpDto
-            {
-                Count = userList.Count,
-                Users = result
-            };
-
-            return lookUpDto;
+            return result;
         }
 
         public async Task<bool> SendMail(SendMailDto mailDto, int userId)

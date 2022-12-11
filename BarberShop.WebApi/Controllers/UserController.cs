@@ -135,7 +135,7 @@ namespace BarberShop.WebApi.Controllers
 
 
         [HttpPost("/api/UserList")]
-        public async Task<ActionResult<UserLookUpDto>> GetAll([FromQuery] GetUserListDto request, [FromBody] UserListDto? userListDto)
+        public async Task<ActionResult<ResponseListTemplate<List<UserListVm>>>> GetAll([FromQuery] GetUserListDto request, [FromBody] UserListDto? userListDto)
         {
             if (request.PageNumber == 0)
                 request.PageNumber = 1;
