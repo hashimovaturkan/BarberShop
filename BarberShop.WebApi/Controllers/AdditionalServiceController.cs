@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
+using BarberShop.Application.EntityCQ.AdditinalService.Commands;
 using BarberShop.Application.EntityCQ.AdditinalService.Interfaces;
+using BarberShop.Application.EntityCQ.Service.Commands;
 using BarberShop.Application.EntityCQ.Service.Interfaces;
 using BarberShop.Application.EntityCQ.Service.Queries;
 using BarberShop.Application.Models.Dto.Service;
@@ -27,6 +29,18 @@ namespace BarberShop.WebApi.Controllers
             _serviceService = serviceService;
             (_configuration, _mapper) = (configuration, mapper);
             _userRoleService = userRoleService;
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult<int>> Create([FromBody] CreateServiceDto createServiceDto)
+        {
+            var command = _mapper.Map<CreateAdditionalServiceCommand>(createServiceDto);
+            SetUserInfo();
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            var id = await _serviceService.Create(command);
+
+            return Ok(id);
         }
 
         [HttpGet]

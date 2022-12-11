@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Services;
+using BarberShop.Application.EntityCQ.AdditinalService.Commands;
 using BarberShop.Application.EntityCQ.AdditinalService.Interfaces;
 using BarberShop.Application.Models.Vm.AdditionalService;
 using BarberShop.Application.Models.Vm.Service;
@@ -23,6 +24,16 @@ namespace BarberShop.Application.EntityCQ.AdditinalService.Services
             this._uriService = uriService;
             this._dbContext = dbContext;
             this._mapper = mapper;
+        }
+
+        public async Task<int> Create(CreateAdditionalServiceCommand dto)
+        {
+            Domain.AdditionalService service = _mapper.Map<Domain.AdditionalService>(dto);
+
+            await _dbContext.AdditionalServices.AddAsync(service, CancellationToken.None);
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return service.Id;
         }
 
         public async Task<List<AdditionalServiceLookupDto>> Get()
