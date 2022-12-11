@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BarberShop.Application.Models.Dto.Barber
 {
-    public class BarberListDto
+    public class BarberDto
     {
         public string? SearchingWord { get; set; }
     }

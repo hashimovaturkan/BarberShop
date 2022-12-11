@@ -14,10 +14,14 @@ namespace BarberShop.Application.Models.Vm.Barber
         public int Id { get; set; }
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
+        public int? FilialId { get; set; }
+        public string? FilialName { get; set; }
         public int? PhotoId { get; set; }
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Domain.Barber, BarberListDto>();
+            profile.CreateMap<Domain.Barber, BarberListDto>()
+                .ForMember(vm => vm.FilialName,
+                    opt => opt.MapFrom(u => u.Filial.Name));
         }
     }
 }

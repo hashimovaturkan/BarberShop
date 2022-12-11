@@ -13,7 +13,6 @@ using BarberShop.WebApi.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using BarberListDto = BarberShop.Application.Models.Dto.Barber.BarberListDto;
 
 namespace BarberShop.WebApi.Controllers
 {
@@ -47,7 +46,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPost("BarberSearchList")]
-        public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get([FromQuery] GetBarberListQuery query, [FromBody] BarberListDto? barberListDto)
+        public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get([FromQuery] GetBarberListQuery query, [FromBody] BarberDto? barberListDto)
         {
             if (query.PageNumber == 0)
                 query.PageNumber = 1;

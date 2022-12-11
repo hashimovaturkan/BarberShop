@@ -100,7 +100,7 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
 
         public async Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route)
         {
-            var barbers = _dbContext.Barbers.Include(e => e.Photo).Where(e => e.IsActive);
+            var barbers = _dbContext.Barbers.Include(e => e.Photo).Include(e => e.Filial).Where(e => e.IsActive);
 
             PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
             IQueryable<Domain.Barber> surveyPagedQuery = paginationFilter.GetPagedList(barbers);
