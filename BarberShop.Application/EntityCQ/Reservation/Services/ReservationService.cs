@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Components;
+using BarberShop.Application.Common.Exceptions;
 using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.Common.Services;
 using BarberShop.Application.EntityCQ.Reservation.Commands;
 using BarberShop.Application.EntityCQ.Reservation.Interfaces;
 using BarberShop.Application.EntityCQ.Reservation.Queries;
+using BarberShop.Application.Models.Dto.Reservation;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.Reservation;
 using BarberShop.Persistence;
@@ -45,6 +47,28 @@ namespace BarberShop.Application.EntityCQ.Reservation.Services
             return reservation.Id;
         }
 
+        public async Task<ResponseListTemplate<List<ReservationListDto>>> GetAllList(GetReservationListQuery query, int id, string route)
+        {
+            var reservations = _dbContext.Reservations
+                .Include(e => e.ReservationStatus)
+                .Include(e => e.Filial)
+                .Include(e => e.SecondService)
+                .Include(e => e.FirstService);
+
+            PaginationFilter paginationFilter = new PaginationFilter(query.PageNumber, query.PageSize);
+            IQueryable<Domain.Reservation> surveyPagedQuery = paginationFilter.GetPagedList(reservations);
+
+            int totalRecords = await reservations.CountAsync();
+
+            List<Domain.Reservation> surveyPaged = await surveyPagedQuery.OrderBy(e => e.CreatedDate).ToListAsync();
+
+            var surveyLookupDtoList = _mapper.Map<List<ReservationListDto>>(surveyPaged);
+
+            ResponseListTemplate<List<ReservationListDto>> result = surveyLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, route);
+
+            return result;
+        }
+
         public async Task<ResponseListTemplate<List<ReservationListDto>>> GetList(GetReservationListQuery query,int id, string route)
         {
             var reservations = _dbContext.Reservations
@@ -67,6 +91,23 @@ namespace BarberShop.Application.EntityCQ.Reservation.Services
 
             return result;
             
+        }
+
+        public async Task<int> Update(UpdateReservationDto dto)
+        {
+            var reservation = await _dbContext.Reservations.FirstOrDefaultAsync(e => e.Id == dto.Id && e.IsActive);
+
+            if (reservation == null)
+                throw new NotFoundException(nameof(Reservation), reservation.Id);
+
+            reservation.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
+            reservation.ReservationStatusId = dto.ReservationStatusId;
+            reservation.ReservationDate = dto.ReservationDate;
+
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return reservation.Id;
         }
     }
 }

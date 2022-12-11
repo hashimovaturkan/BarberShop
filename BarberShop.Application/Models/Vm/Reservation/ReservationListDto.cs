@@ -10,6 +10,7 @@ namespace BarberShop.Application.Models.Vm.Reservation
 {
     public class ReservationListDto : IMapWith<Domain.Reservation>
     {
+        public int Id { get; set; }
         public DateTime ReservationDate { get; set; }
         public int? FirstServiceId { get; set; }
         public string? FirstServiceName { get; set; }
