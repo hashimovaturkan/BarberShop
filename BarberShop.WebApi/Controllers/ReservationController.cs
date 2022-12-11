@@ -81,7 +81,7 @@ namespace BarberShop.WebApi.Controllers
             return Ok(vm);
         }
 
-        [HttpGet]
+        [HttpGet("ReservationStatusList")]
         public async Task<ActionResult<List<ReservationStatusListVm>>> Get()
         {
             var vm = await _reservationStatusService.GetList();
