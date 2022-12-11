@@ -10,9 +10,11 @@ namespace BarberShop.Domain
     {
         public int? PhotoId { get; set; }
         public string Name { get; set; }
+        public int? FilialId { get; set; }
 
         public int Priority { get; set; }
         public string? Description { get; set; }
         public virtual Photo Photo { get; set; }
+        public virtual Filial Filial { get; set; }
     }
 }

@@ -180,6 +180,9 @@ namespace BarberShop.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FilialId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -197,6 +200,8 @@ namespace BarberShop.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FilialId");
 
                     b.HasIndex("PhotoId");
 
@@ -1045,9 +1050,15 @@ namespace BarberShop.Persistence.Migrations
 
             modelBuilder.Entity("BarberShop.Domain.Barber", b =>
                 {
+                    b.HasOne("BarberShop.Domain.Filial", "Filial")
+                        .WithMany()
+                        .HasForeignKey("FilialId");
+
                     b.HasOne("BarberShop.Domain.Photo", "Photo")
                         .WithMany()
                         .HasForeignKey("PhotoId");
+
+                    b.Navigation("Filial");
 
                     b.Navigation("Photo");
                 });

@@ -1,4 +1,5 @@
 ﻿using BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber;
+using BarberShop.Application.EntityCQ.Barber.Commands.UpdateBarber;
 using BarberShop.Application.EntityCQ.Barber.Queries;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.Barber;
@@ -15,5 +16,6 @@ namespace BarberShop.Application.EntityCQ.Barber.Interfaces
     {
         Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route);
         Task<int> Create(CreateBarberCommand dto);
+        Task<int> Update(UpdateBarberCommand dto);
     }
 }

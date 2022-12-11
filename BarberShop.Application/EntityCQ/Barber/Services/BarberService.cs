@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Components;
+using BarberShop.Application.Common.Exceptions;
 using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.Common.Services;
 using BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber;
+using BarberShop.Application.EntityCQ.Barber.Commands.UpdateBarber;
 using BarberShop.Application.EntityCQ.Barber.Interfaces;
 using BarberShop.Application.EntityCQ.Barber.Queries;
 using BarberShop.Application.Models.Template;
@@ -22,6 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Photo = BarberShop.Domain.Photo;
 
 namespace BarberShop.Application.EntityCQ.Barber.Services
 {
@@ -47,7 +50,7 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
 
             if (dto.Image != null)
             {
-                BarberShop.Domain.Photo photo = new BarberShop.Domain.Photo();
+                Domain.Photo photo = new Domain.Photo();
 
                 var image = dto.Image.ConvertFile();
 
@@ -91,6 +94,38 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
             ResponseListTemplate<List<BarberListDto>> result = surveyLookupDtoList.CreatePagedReponse(paginationFilter, totalRecords, _uriService, route);
 
             return result;
+        }
+
+        public async Task<int> Update(UpdateBarberCommand dto)
+        {
+            var barber = await _dbContext.Barbers.Include(e => e.Filial).Include(e => e.Photo).FirstOrDefaultAsync(e => e.Id == dto.Id && e.IsActive);
+            if (barber == null)
+                throw new NotFoundException(nameof(Barber), barber.Id);
+
+            var imageId = barber.PhotoId;
+
+            _mapper.Map(dto, barber);
+            barber.UpdatedDate = DateTime.UtcNow.AddHours(4);
+            barber.PhotoId = imageId;
+
+            if (dto.Image != null)
+            {
+                Photo photo = new Photo();
+                var image = dto.Image.ConvertFile();
+
+                photo = new()
+                {
+                    Name = image.File.FileName,
+                    Path = image.Path,
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedIp = "::1"
+                };
+                barber.Photo = photo;
+            }
+
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return barber.Id;
         }
     }
 }

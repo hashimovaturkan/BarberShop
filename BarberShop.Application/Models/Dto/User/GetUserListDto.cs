@@ -12,7 +12,6 @@ namespace BarberShop.Application.Models.Dto.User
 {
     public class GetUserListDto : RequestListTemplate, IMapWith<GetUserListQuery>
     {
-        public string? SearchingWord { get; set; }
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<GetUserListDto, GetUserListQuery>();

@@ -2,6 +2,7 @@
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
 using BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber;
+using BarberShop.Application.EntityCQ.Barber.Commands.UpdateBarber;
 using BarberShop.Application.EntityCQ.Barber.Interfaces;
 using BarberShop.Application.EntityCQ.Barber.Queries;
 using BarberShop.Application.Enums;
@@ -33,7 +34,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPost("BarberList")]
-        public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get(GetBarberListQuery query)
+        public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get([FromQuery]GetBarberListQuery query)
         {
             if (query.PageNumber == 0)
                 query.PageNumber = 1;
@@ -52,6 +53,18 @@ namespace BarberShop.WebApi.Controllers
             command.UserId = UserId;
             command.UserIp = UserIp;
             var id = await _barberService.Create(command);
+
+            return Ok(id);
+        }
+
+        [HttpPost("Update")]
+        public async Task<ActionResult<int>> Update([FromBody] UpdateBarberDto updateBarberDto)
+        {
+            var command = _mapper.Map<UpdateBarberCommand>(updateBarberDto);
+            SetUserInfo();
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            var id = await _barberService.Update(command);
 
             return Ok(id);
         }
