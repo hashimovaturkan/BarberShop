@@ -1,4 +1,6 @@
-﻿using BarberShop.Application.EntityCQ.Service.Queries;
+﻿using BarberShop.Application.EntityCQ.Filial.Commands;
+using BarberShop.Application.EntityCQ.Service.Commands;
+using BarberShop.Application.EntityCQ.Service.Queries;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.Service;
 using System;
@@ -13,5 +15,6 @@ namespace BarberShop.Application.EntityCQ.Service.Interfaces
     {
         Task<ResponseListTemplate<List<ServiceLookupDto>>> GetList(GetServiceListQuery query, string route);
         Task<List<ServiceLookupDto>> Get();
+        Task<int> Create(CreateServiceCommand dto);
     }
 }

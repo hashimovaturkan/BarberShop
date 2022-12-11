@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
+using BarberShop.Application.EntityCQ.Filial.Commands;
 using BarberShop.Application.EntityCQ.Reservation.Interfaces;
+using BarberShop.Application.EntityCQ.Service.Commands;
 using BarberShop.Application.EntityCQ.Service.Interfaces;
 using BarberShop.Application.EntityCQ.Service.Queries;
 using BarberShop.Application.Enums;
+using BarberShop.Application.Models.Dto.Filial;
 using BarberShop.Application.Models.Dto.Service;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.Filial;
@@ -46,6 +49,18 @@ namespace BarberShop.WebApi.Controllers
 
             var vm = await _serviceService.GetList(query, Request.Path.Value);
             return Ok(vm);
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult<int>> Create([FromBody] CreateServiceDto createServiceDto)
+        {
+            var command = _mapper.Map<CreateServiceCommand>(createServiceDto);
+            SetUserInfo();
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            var id = await _serviceService.Create(command);
+
+            return Ok(id);
         }
 
 

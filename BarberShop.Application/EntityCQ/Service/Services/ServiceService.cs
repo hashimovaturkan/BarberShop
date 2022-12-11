@@ -2,6 +2,7 @@
 using BarberShop.Application.Common.Components;
 using BarberShop.Application.Common.Extensions;
 using BarberShop.Application.Common.Services;
+using BarberShop.Application.EntityCQ.Service.Commands;
 using BarberShop.Application.EntityCQ.Service.Interfaces;
 using BarberShop.Application.EntityCQ.Service.Queries;
 using BarberShop.Application.Models.Template;
@@ -27,6 +28,16 @@ namespace BarberShop.Application.EntityCQ.Service.Services
             this._uriService = uriService;
             this._dbContext = dbContext;
             this._mapper = mapper;
+        }
+
+        public async Task<int> Create(CreateServiceCommand dto)
+        {
+            Domain.Service service = _mapper.Map<Domain.Service>(dto);
+
+            await _dbContext.Services.AddAsync(service, CancellationToken.None);
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return service.Id;
         }
 
         public async Task<List<ServiceLookupDto>> Get()
