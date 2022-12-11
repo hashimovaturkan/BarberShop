@@ -6,6 +6,7 @@ using BarberShop.Application.EntityCQ.AdditinalService.Interfaces;
 using BarberShop.Application.EntityCQ.Service.Commands;
 using BarberShop.Application.EntityCQ.Service.Interfaces;
 using BarberShop.Application.EntityCQ.Service.Queries;
+using BarberShop.Application.Models.Dto.AdditionalService;
 using BarberShop.Application.Models.Dto.Service;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.AdditionalService;
@@ -32,7 +33,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult<int>> Create([FromBody] CreateServiceDto createServiceDto)
+        public async Task<ActionResult<int>> Create([FromBody] CreateAdditionalServiceDto createServiceDto)
         {
             var command = _mapper.Map<CreateAdditionalServiceCommand>(createServiceDto);
             SetUserInfo();
