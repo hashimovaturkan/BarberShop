@@ -14,6 +14,7 @@ namespace BarberShop.Application.Models.Dto.AdditionalService
     public class CreateAdditionalServiceDto : IMapWith<CreateAdditionalServiceCommand>
     {
         public string Name { get; set; }
+        public double? Price { get; set; }
 
         public void Mapping(Profile profile)
         {

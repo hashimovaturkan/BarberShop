@@ -13,6 +13,7 @@ namespace BarberShop.Application.EntityCQ.AdditinalService.Commands
     public class CreateAdditionalServiceCommand : RequestTemplate, IMapWith<Domain.AdditionalService>
     {
         public string Name { get; set; }
+        public double? Price { get; set; }
 
         public void Mapping(Profile profile)
         {

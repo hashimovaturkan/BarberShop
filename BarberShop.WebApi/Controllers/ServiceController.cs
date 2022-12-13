@@ -37,7 +37,7 @@ namespace BarberShop.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ResponseListTemplate<List<ServiceLookupDto>>>> Get([FromBody] GetServiceListDto dto)
+        public async Task<ActionResult<ResponseListTemplate<List<ServiceLookupDto>>>> Get([FromQuery] GetServiceListDto dto)
         {
             var query = _mapper.Map<GetServiceListQuery>(dto);
 
