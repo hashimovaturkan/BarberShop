@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using BarberShop.Application.Common.Exceptions;
 using BarberShop.Application.Common.Services;
+using BarberShop.Application.EntityCQ.Gift.Commands.CreateGift;
+using BarberShop.Application.EntityCQ.Gift.Commands.DeleteGift;
 using BarberShop.Application.EntityCQ.Gift.Commands.GiftOrder;
+using BarberShop.Application.EntityCQ.Gift.Commands.UpdateGift;
 using BarberShop.Application.EntityCQ.Gift.Interfaces;
 using BarberShop.Application.Models.Dto.Gift;
 using BarberShop.Application.Models.Vm.Filial;
@@ -32,6 +35,30 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
             this._userRepo = userRepo;
             this._mapper = mapper;
             this._uriService = _uriService;
+        }
+
+        public async Task<int> Create(CreateGiftCommand dto)
+        {
+            Domain.Gift gift = _mapper.Map<Domain.Gift>(dto);
+
+            await _dbContext.Gifts.AddAsync(gift, CancellationToken.None);
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return gift.Id;
+        }
+
+        public async Task<int> Delete(DeleteGiftCommand dto)
+        {
+            var gift = await _dbContext.Gifts.FirstOrDefaultAsync(e => e.Id == dto.Id && e.IsActive);
+            if (gift == null)
+                throw new NotFoundException(nameof(Gift), gift.Id);
+
+            gift.DeletedDate = DateTime.UtcNow.AddHours(4);
+            gift.IsActive = false;
+
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return gift.Id;
         }
 
         public async Task<List<GiftListDto>> GetList()
@@ -80,6 +107,20 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
             return true;
 
 
+        }
+
+        public async Task<int> Update(UpdateGiftCommand dto)
+        {
+            var gift = await _dbContext.Gifts.FirstOrDefaultAsync(e => e.Id == dto.Id && e.IsActive);
+            if (gift == null)
+                throw new NotFoundException(nameof(Gift), gift.Id);
+
+            _mapper.Map(dto, gift);
+            gift.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return gift.Id;
         }
     }
 }

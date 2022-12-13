@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
+using BarberShop.Application.EntityCQ.Gift.Commands.CreateGift;
+using BarberShop.Application.EntityCQ.Gift.Commands.DeleteGift;
 using BarberShop.Application.EntityCQ.Gift.Commands.GiftOrder;
+using BarberShop.Application.EntityCQ.Gift.Commands.UpdateGift;
 using BarberShop.Application.EntityCQ.Gift.Interfaces;
 using BarberShop.Application.Models.Dto.Gift;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +26,39 @@ namespace BarberShop.WebApi.Controllers
             _giftService = giftService;
             (_configuration, _mapper) = (configuration, mapper);
             _userRoleService = userRoleService;
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult<int>> Create([FromBody] CreateGiftDto createGiftDto)
+        {
+            var command = _mapper.Map<CreateGiftCommand>(createGiftDto);
+            SetUserInfo();
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            var id = await _giftService.Create(command);
+
+            return Ok(id);
+        }
+
+        [HttpPost("Update")]
+        public async Task<ActionResult<int>> Update([FromBody] UpdateGiftDto updateGiftDto)
+        {
+            var command = _mapper.Map<UpdateGiftCommand>(updateGiftDto);
+            SetUserInfo();
+            command.UserId = UserId;
+            command.UserIp = UserIp;
+            var id = await _giftService.Update(command);
+
+            return Ok(id);
+        }
+
+        [HttpPost("Delete")]
+        public async Task<ActionResult<int>> Delete([FromBody] DeleteGiftDto deleteGiftDto)
+        {
+            var command = _mapper.Map<DeleteGiftCommand>(deleteGiftDto);
+            var id = await _giftService.Delete(command);
+
+            return Ok();
         }
 
         [HttpGet]

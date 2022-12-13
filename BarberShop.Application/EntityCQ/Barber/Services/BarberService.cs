@@ -9,21 +9,10 @@ using BarberShop.Application.EntityCQ.Barber.Interfaces;
 using BarberShop.Application.EntityCQ.Barber.Queries;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.Barber;
-using BarberShop.Application.Models.Vm.Filial;
-using BarberShop.Application.Models.Vm.User;
-using BarberShop.Domain;
 using BarberShop.Persistence;
-using BarberShop.Persistence.Migrations;
-using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Photo = BarberShop.Domain.Photo;
 
 namespace BarberShop.Application.EntityCQ.Barber.Services
