@@ -9,5 +9,6 @@ namespace BarberShop.Domain
     public class AdditionalService : Template
     {
         public string Name { get; set; }
+        public double? Price { get; set; }
     }
 }
