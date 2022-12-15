@@ -19,7 +19,7 @@ namespace BarberShop.Application.EntityCQ.Payment.Services
         {
             try
             {
-                StripeConfiguration.ApiKey = "pk_test_TYooMQauvdEDq54NiTphI7jx";
+                StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
 
                 var optionsToken = new TokenCreateOptions
                 {
