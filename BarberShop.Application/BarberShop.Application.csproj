@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EntityCQ\Balance\Commands\" />
     <Folder Include="EntityCQ\Gift\Queries\" />
   </ItemGroup>
 

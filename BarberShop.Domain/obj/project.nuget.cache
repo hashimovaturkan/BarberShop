@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0qU6+ZFz/gMTAOwbINpap1rmH6BeZejI5e7Ojls43X6D4yG5CnkZL0RU76E/MdwcqfTvTxRUlpOvJo7u8lQj2Q==",
+  "dgSpecHash": "P67dK+SyphUQV5AsPzPtOmg/VYQadbByqcxt2718x0fegDAvueoo3H62svWa2S1JN1mbM0HZSSVHSRscfgdWDQ==",
   "success": true,
-  "projectFilePath": "D:\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj",
+  "projectFilePath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -8,6 +8,7 @@ using BarberShop.Application.EntitiesCQ.User.Interfaces;
 using BarberShop.Application.EntitiesCQ.User.Queries.UserLogin;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
+using BarberShop.Application.Models.Dto.Bonus;
 using BarberShop.Application.Models.Dto.Mail;
 using BarberShop.Application.Models.Template;
 using BarberShop.Application.Models.Vm.User;
@@ -22,6 +23,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MoreLinq;
+using Stripe;
 using System;
 using System.IO;
 using System.Web;
@@ -330,6 +332,19 @@ namespace IntraNet.Application.EntitiesCQ.User.Services
 
             return isSuccess;
 
+        }
+
+        public async Task<int> UpdateBonus(UpdateBonusDto dto)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Id == dto.UserId);
+
+            if (user == null)
+                throw new NotFoundException(nameof(User), user.Id);
+
+            user.UserBonuses = dto.UserBonuses;
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return user.Id;
         }
     }
 }

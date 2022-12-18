@@ -10,6 +10,7 @@ using IntraNet.Application.Models.Vm.User;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
 using BarberShop.Application.Models.Dto.Mail;
+using BarberShop.Application.Models.Dto.Bonus;
 
 namespace BarberShop.Application.EntitiesCQ.User.Interfaces
 {
@@ -26,5 +27,6 @@ namespace BarberShop.Application.EntitiesCQ.User.Interfaces
         Task<ResponseListTemplate<List<UserListVm>>> GetList(GetUserListQuery query);
         Task<UserDetailsVm> Get(int userId);
         Task<int> Update(UpdateUserCommand userDto);
+        Task<int> UpdateBonus(UpdateBonusDto dto);
     }
 }

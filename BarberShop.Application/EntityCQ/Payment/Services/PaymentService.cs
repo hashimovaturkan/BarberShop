@@ -19,11 +19,11 @@ namespace BarberShop.Application.EntityCQ.Payment.Services
         {
             try
             {
-                StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+                StripeConfiguration.ApiKey = "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";
 
                 var optionsToken = new TokenCreateOptions
                 {
-
+                    
                     Card = new TokenCardOptions
                     {
                         Number = paymentDto.CardNumber,

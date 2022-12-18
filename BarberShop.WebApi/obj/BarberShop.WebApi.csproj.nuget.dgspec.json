@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj": {}
+    "D:\\Lesson\\Projects\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj": {}
   },
   "projects": {
-    "D:\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj": {
+    "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj",
+        "projectUniqueName": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj",
         "projectName": "BarberShop.Application",
-        "projectPath": "D:\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj",
-        "packagesPath": "C:\\Users\\turkan.hashimova\\.nuget\\packages\\",
-        "outputPath": "D:\\BarberShop\\BarberShop.Application\\obj\\",
+        "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\turkan.hashimova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj": {
-                "projectPath": "D:\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj"
+              "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj": {
+                "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj"
               }
             }
           }
@@ -135,7 +136,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -144,24 +146,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj": {
+    "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj",
+        "projectUniqueName": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj",
         "projectName": "BarberShop.Domain",
-        "projectPath": "D:\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj",
-        "packagesPath": "C:\\Users\\turkan.hashimova\\.nuget\\packages\\",
-        "outputPath": "D:\\BarberShop\\BarberShop.Domain\\obj\\",
+        "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\turkan.hashimova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -170,6 +172,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -193,7 +196,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -202,24 +206,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj": {
+    "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj",
+        "projectUniqueName": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj",
         "projectName": "BarberShop.Persistence",
-        "projectPath": "D:\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj",
-        "packagesPath": "C:\\Users\\turkan.hashimova\\.nuget\\packages\\",
-        "outputPath": "D:\\BarberShop\\BarberShop.Persistence\\obj\\",
+        "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Persistence\\BarberShop.Persistence.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\turkan.hashimova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -228,14 +232,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj": {
-                "projectPath": "D:\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj"
+              "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj": {
+                "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Domain\\BarberShop.Domain.csproj"
               }
             }
           }
@@ -285,7 +290,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -294,24 +300,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj": {
+    "D:\\Lesson\\Projects\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj",
+        "projectUniqueName": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj",
         "projectName": "BarberShop.WebApi",
-        "projectPath": "D:\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj",
-        "packagesPath": "C:\\Users\\turkan.hashimova\\.nuget\\packages\\",
-        "outputPath": "D:\\BarberShop\\BarberShop.WebApi\\obj\\",
+        "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.WebApi\\BarberShop.WebApi.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\turkan.hashimova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -320,14 +326,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj": {
-                "projectPath": "D:\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj"
+              "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj": {
+                "projectPath": "D:\\Lesson\\Projects\\BarberShop\\BarberShop.Application\\BarberShop.Application.csproj"
               }
             }
           }
@@ -411,7 +418,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -423,7 +431,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

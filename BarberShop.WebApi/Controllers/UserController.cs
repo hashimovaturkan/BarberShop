@@ -7,6 +7,7 @@ using BarberShop.Application.EntitiesCQ.UserRole.Interfaces;
 using BarberShop.Application.EntityCQ.User.Commands.UpdateUser;
 using BarberShop.Application.EntityCQ.User.Queries.UserList;
 using BarberShop.Application.Enums;
+using BarberShop.Application.Models.Dto.Bonus;
 using BarberShop.Application.Models.Dto.Mail;
 using BarberShop.Application.Models.Dto.User;
 using BarberShop.Application.Models.Template;
@@ -186,6 +187,17 @@ namespace BarberShop.WebApi.Controllers
                 return Ok();
             else
                 return BadRequest();
+        }
+
+        [HttpPost("/api/UpdateBonus")]
+        public async Task<ActionResult<UserDetailsVm>> UpdateBonus([FromBody] UpdateBonusDto dto)
+        {
+            if(!dto.UserId.HasValue || dto.UserId == 0 )
+                dto.UserId = UserId;
+
+            var user = await _userService.UpdateBonus(dto);
+
+            return Ok(user);
         }
 
 
