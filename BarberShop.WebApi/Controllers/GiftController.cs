@@ -79,9 +79,36 @@ namespace BarberShop.WebApi.Controllers
         public async Task<ActionResult> OrderGift([FromBody] GiftOrderDto giftOrderDto)
         {
             var command = _mapper.Map<OrderGiftCommand>(giftOrderDto);
-            command.UserId = UserId;
+
+            if (giftOrderDto.UserId is null || giftOrderDto.UserId == 0)
+                giftOrderDto.UserId = UserId;
+
             command.UserIp = UserIp;
             await _giftService.OrderGift(command);
+
+            return Ok();
+        }
+
+        [HttpGet("UserGiftList")]
+        public async Task<ActionResult<List<OrderGiftListVm>>> UserGiftList([FromBody] UserGiftDto dto)
+        {
+            if (dto.UserId is null || dto.UserId == 0)
+                dto.UserId = UserId;
+
+            var vm = await _giftService.GetOrderGiftList(dto.UserId.Value);
+            return Ok(vm);
+        }
+
+        [HttpPost("DeleteOrderGift")]
+        public async Task<ActionResult> DeleteOrderGift([FromBody] GiftOrderDto giftOrderDto)
+        {
+            var command = _mapper.Map<OrderGiftCommand>(giftOrderDto);
+
+            if (giftOrderDto.UserId is null || giftOrderDto.UserId == 0)
+                giftOrderDto.UserId = UserId;
+
+            command.UserIp = UserIp;
+            await _giftService.DeleteOrderGift(command);
 
             return Ok();
         }

@@ -16,6 +16,7 @@ namespace BarberShop.Application.EntityCQ.Barber.Commands.CreateBarber
         public string Name { get; set; }
         public int? FilialId { get; set; }
         public string? Image { get; set; }
+        public string? Description { get; set; }
 
         public void Mapping(Profile profile)
         {

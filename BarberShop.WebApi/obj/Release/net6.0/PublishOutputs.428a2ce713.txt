@@ -38,6 +38,7 @@ D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\RestSharp.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Sentry.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Sentry.AspNetCore.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Sentry.Extensions.Logging.dll
+D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Stripe.net.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -60,8 +61,8 @@ D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\n
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\BarberShop.Application.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\BarberShop.Domain.dll
 D:\BarberShop\BarberShop.WebApi\obj\Release\net6.0\PubTmp\Out\BarberShop.Persistence.dll

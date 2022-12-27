@@ -17,6 +17,8 @@ namespace BarberShop.Application.Models.Vm.Barber
         public int? FilialId { get; set; }
         public string? FilialName { get; set; }
         public int? PhotoId { get; set; }
+        public string? Description { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Domain.Barber, BarberListDto>()

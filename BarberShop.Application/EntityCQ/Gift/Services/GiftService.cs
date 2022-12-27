@@ -61,6 +61,21 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
             return gift.Id;
         }
 
+        public async Task<bool> DeleteOrderGift(OrderGiftCommand command)
+        {
+            var userGift = await _dbContext.UserGiftRelations.FirstOrDefaultAsync(e => e.UserId == command.UserId && e.GiftId == command.GiftId);
+
+            if (userGift == null)
+                throw new UnauthorizedException("UserGift not found");
+
+            userGift.DeletedDate = DateTime.UtcNow.AddHours(4);
+            userGift.IsActive = false;
+
+            await _dbContext.SaveChangesAsync(CancellationToken.None);
+
+            return true;
+        }
+
         public async Task<List<GiftListDto>> GetList()
         {
             var gifts = await _dbContext.Gifts.Where(e => e.IsActive).ToListAsync();

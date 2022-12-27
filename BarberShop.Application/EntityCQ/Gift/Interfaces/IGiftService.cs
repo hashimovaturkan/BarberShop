@@ -16,6 +16,7 @@ namespace BarberShop.Application.EntityCQ.Gift.Interfaces
     {
         Task<List<GiftListDto>> GetList();
         Task<bool> OrderGift(OrderGiftCommand command);
+        Task<bool> DeleteOrderGift(OrderGiftCommand command);
         Task<List<OrderGiftListVm>> GetOrderGiftList(int userId);
         Task<int> Create(CreateGiftCommand dto);
         Task<int> Update(UpdateGiftCommand dto);

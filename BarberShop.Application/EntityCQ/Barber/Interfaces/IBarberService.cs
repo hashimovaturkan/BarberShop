@@ -18,5 +18,6 @@ namespace BarberShop.Application.EntityCQ.Barber.Interfaces
         Task<ResponseListTemplate<List<BarberListDto>>> GetList(GetBarberListQuery query, string route);
         Task<int> Create(CreateBarberCommand dto);
         Task<int> Update(UpdateBarberCommand dto);
+        Task<BarberListDto> Get(int Id);
     }
 }

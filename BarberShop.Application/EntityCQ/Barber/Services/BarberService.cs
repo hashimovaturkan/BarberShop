@@ -141,5 +141,17 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
 
             return barber.Id;
         }
+
+        public async Task<BarberListDto> Get(int Id)
+        {
+            var barber = await _dbContext.Barbers.Where(e => e.IsActive && e.Id == Id).FirstOrDefaultAsync();
+
+            var vm = _mapper.Map<BarberListDto>(barber);
+
+            if (vm.PhotoId != null)
+                vm.ImageUrl = httpContextAccessor.GeneratePhotoUrl((int)vm.PhotoId);
+
+            return vm;
+        }
     }
 }

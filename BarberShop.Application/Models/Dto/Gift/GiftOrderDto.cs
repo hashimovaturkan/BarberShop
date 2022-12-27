@@ -14,6 +14,7 @@ namespace BarberShop.Application.Models.Dto.Gift
     public class GiftOrderDto : IMapWith<OrderGiftCommand>
     {
         public int GiftId { get; set; }
+        public int? UserId { get; set; }
 
         public void Mapping(Profile profile)
         {

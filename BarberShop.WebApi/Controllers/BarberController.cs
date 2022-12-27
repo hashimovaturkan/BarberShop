@@ -33,6 +33,14 @@ namespace BarberShop.WebApi.Controllers
             _userRoleService = userRoleService;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<BarberListDto>> Get([FromBody] BarberDetailsDto dto)
+        {
+            var barber = await _barberService.Get(dto.Id);
+
+            return Ok(barber);
+        }
+
         [HttpPost("BarberList")]
         public async Task<ActionResult<ResponseListTemplate<List<BarberListDto>>>> Get([FromQuery]GetBarberListQuery query)
         {
