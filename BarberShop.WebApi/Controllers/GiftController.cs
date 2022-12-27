@@ -89,7 +89,7 @@ namespace BarberShop.WebApi.Controllers
             return Ok();
         }
 
-        [HttpGet("UserGiftList")]
+        [HttpPost("UserGiftList")]
         public async Task<ActionResult<List<OrderGiftListVm>>> UserGiftList([FromBody] UserGiftDto dto)
         {
             if (dto.UserId is null || dto.UserId == 0)
