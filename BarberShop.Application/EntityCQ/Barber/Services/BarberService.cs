@@ -146,6 +146,9 @@ namespace BarberShop.Application.EntityCQ.Barber.Services
         {
             var barber = await _dbContext.Barbers.Where(e => e.IsActive && e.Id == Id).FirstOrDefaultAsync();
 
+            if(barber is null)
+                throw new NotFoundException(nameof(Barber), barber.Id);
+
             var vm = _mapper.Map<BarberListDto>(barber);
 
             if (vm.PhotoId != null)

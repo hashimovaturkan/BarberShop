@@ -66,7 +66,7 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
             var userGift = await _dbContext.UserGiftRelations.FirstOrDefaultAsync(e => e.UserId == command.UserId && e.GiftId == command.GiftId);
 
             if (userGift == null)
-                throw new UnauthorizedException("UserGift not found");
+                throw new NotFoundException(nameof(UserGiftRelation), userGift.Id);
 
             userGift.DeletedDate = DateTime.UtcNow.AddHours(4);
             userGift.IsActive = false;
@@ -88,6 +88,9 @@ namespace BarberShop.Application.EntityCQ.Gift.Services
         public async Task<List<OrderGiftListVm>> GetOrderGiftList(int userId)
         {
             var user = await _userRepo.GetUserByIdAsync(userId);
+
+            if(user is null)
+                throw new NotFoundException(nameof(User), user.Id);
 
             var vm = _mapper.Map<List<OrderGiftListVm>>(user.UserGiftRelations);
 
